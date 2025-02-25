@@ -1,0 +1,18 @@
+package task;
+
+
+public abstract class ConnectionAPI {
+  public static ConnectionAPI API;
+  
+  /**
+   * Returns whether ITU++ is able to connect at the moment.
+   * @return true if ITU++ is available, false otherwise
+   */
+  public abstract boolean isITUPlusPlusAvailable();
+
+  /**
+   * Returns whether Eduroam is able to connect at the moment.
+   * @return true if Eduroam is available, false otherwise
+   */
+  public abstract boolean isEduroamAvailable();
+}

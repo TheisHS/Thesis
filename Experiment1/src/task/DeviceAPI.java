@@ -1,0 +1,13 @@
+package task;
+import java.util.*;
+
+public abstract class DeviceAPI {
+  public static DeviceAPI API;
+  
+  /**
+   * Returns a list of available connections. All names are 
+   * lowercase and without spaces.
+   * @return a list of available connections
+   */
+  public abstract ArrayList<String> getAvailableConnections();
+}
