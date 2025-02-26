@@ -19,7 +19,7 @@ class Instructions(Page):
     pass
 
 class Task(Page):
-    timeout_seconds = 1200
+    timeout_seconds = 20*60
     pass
 
 class Break(Page):

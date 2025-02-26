@@ -2,22 +2,39 @@ from otree.api import *
 import os
 import time
 
-"""class Instructions(Page):
-    Introduction and instructions before the task
-    timeout_seconds = 120  # Set a time limit for reading instructions (optional)"""
+class Instructions(Page):
+    timeout_seconds = 5*60
+    template_name = 'chatGPT/templates/Instructions.html'
+
+class TaskDescription1(Page):
+    timeout_seconds = 3*60
+    template_name = 'chatGPT/templates/TaskDescription1.html'
+
+    @staticmethod
+    def vars_for_template(player):
+        return dict(
+            useAI = False,
+        )
 
 class Task(Page):
     """The main developer task with a split-screen setup"""
-    timeout_seconds = 1200
+    timeout_seconds = 20*60
     template_name = 'chatGPT/templates/Task.html'
     
+    @staticmethod
+    def vars_for_template(player):
+        return dict(
+            useAI = False,
+        )
 
-    """def js_vars(player):
-        return {"start_time": int(time.time() * 1000)}"""
+class Break1(Page):
+    """Break screen before task description"""
+    timeout_seconds = 2*60 
+    template_name = 'chatGPT/templates/Break.html'
 
-class Break(Page):
-    """Break screen before post-task questions"""
-    timeout_seconds = 60  # 1-minute break
+class Break2(Page):
+    """Break screen before task description"""
+    timeout_seconds = 2*60
     template_name = 'chatGPT/templates/Break.html'
 
 class Survey(Page):
@@ -26,4 +43,4 @@ class Survey(Page):
     form_fields = ['feedback']
     template_name = 'chatGPT/templates/Survey.html'
 
-page_sequence = [Task, Break, Survey]
+page_sequence = [Instructions, Break1, TaskDescription1, Task, Break2, Survey]
