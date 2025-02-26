@@ -6,7 +6,7 @@ WORKDIR /app
 COPY . .
 RUN apt-get update && apt-get install -y python3 python3-pip && rm -rf /var/lib/apt/lists/*
 ARG DEBIAN_FRONTEND=noninteractive
-RUN pip install flask 
+RUN pip install flask && pip install flask-cors
 RUN apt-get update && apt-get install -y openjdk-11-jdk && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 5000
