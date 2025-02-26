@@ -5,8 +5,11 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
+COPY ./code-server/redhat-java.vsix /redhat-java.vsix
+
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
+RUN code-server --install-extension /redhat-java.vsix
 
 EXPOSE 8080
 

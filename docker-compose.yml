@@ -6,6 +6,10 @@ services:
       context: ./Testserver
     ports:
       - "5000:5000"
+    volumes:
+      - ./config:/config
+      - ./Experiment1/src:/templates/exp1
+      - ./Experiment2/src:/templates/exp2
     networks:
       - internal
 
@@ -26,8 +30,12 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
       - PASSWORD=mysecretpassword # Change this!
+      - DOCKER_MODS=linuxserver/mods:code-server-extension-arguments
+      - VSCODE_EXTENSION_IDS=redhat.java
     volumes:
       - ./config:/config
+      - ./Experiment1/src:/templates/exp1
+      - ./Experiment2/src:/templates/exp2
     networks:
       - internal
     expose:
