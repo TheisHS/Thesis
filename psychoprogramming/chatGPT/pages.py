@@ -13,7 +13,7 @@ class TaskDescription2(Page):
     def vars_for_template(player):
         return dict(
             id = 2,
-            useAI = False,
+            useAI = True,
         )
 
     @staticmethod
@@ -43,7 +43,7 @@ class Task1(Page):
     @staticmethod
     def vars_for_template(player):
         return dict(
-            useAI = True,
+            useAI = False,
             id = 1,
         )
 
