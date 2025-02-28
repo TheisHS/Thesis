@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  flask:
+    build:
+      context: ./Testserver
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./config:/config
+      - ./Experiment1/src:/templates/exp1
+      - ./Experiment2/src:/templates/exp2
+    networks:
+      - internal
+
+  otree:
+    build:
+      context: ./psychoprogramming
+    ports:
+      - "8000:8000"
+    networks:
+      - internal
+
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - PASSWORD=mysecretpassword # Change this!
+      - DOCKER_MODS=linuxserver/mods:code-server-extension-arguments
+      - VSCODE_EXTENSION_IDS=redhat.java
+    volumes:
+      - ./config:/config
+      - ./Experiment1/src:/templates/exp1
+      - ./Experiment2/src:/templates/exp2
+    networks:
+      - internal
+    expose:
+      - "8080"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    restart: unless-stopped
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80" # Expose Nginx on port 80
+    depends_on:
+      - code-server
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

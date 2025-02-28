@@ -1,0 +1,68 @@
+{% extends "global/Page.html" %} {% block content %}
+
+<h1>Programming Task 1</h1>
+
+<p>
+  Your task is described below. You have 3 minutes to read it, but the diagrams
+  will be available in the provided IDE when the assignment starts.
+</p>
+
+<p class="task-description">
+  Implement the system described by the UML class-diagram (left). The UML
+  activity-diagram (right) explains the mechanisms of connecting to a Wifi
+  network. If both are available, ITUPlusPlus should be preferred.
+</p>
+
+<div class="note">
+  {% if useAI %}
+  <p>
+    You will have access to ChatGPT for this task.
+    <strong>You are encouraged and expected </strong> to use it for development.
+  </p>
+  {% else %}
+  <p>
+    You will have access to a normal browser, starting at Google, while solving
+    this task. You are
+    <strong>not allowed to access ChatGPT</strong> or any other online AI
+    assistance tools.
+  </p>
+  {% endif %}
+</div>
+
+<div class="images full">
+  <img height="420px" src="{{ static 'exp1/class-diagram.png' }}" />
+  <img height="380px" src="{{ static 'exp1/activity-diagram.png' }}" />
+</div>
+
+<button
+  class="btn btn-primary"
+  onclick="document.getElementById('next-button').click();"
+>
+  Continue
+</button>
+
+<style>
+  .task-description {
+    font-size: 18px;
+    margin: 20px 0px;
+  }
+
+  .note {
+    font-size: 18px;
+    background: rgba(105, 63, 223, 0.5);
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+
+  .images {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+    margin: 60px 0px;
+  }
+</style>
+
+{% endblock %}

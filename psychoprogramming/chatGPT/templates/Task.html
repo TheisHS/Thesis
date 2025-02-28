@@ -1,0 +1,71 @@
+{% extends "global/Page.html" %} {% block content %}
+
+<h1>Programming Task 1</h1>
+
+<!-- <p><strong>Time Remaining: </strong> <span id="timer"></span></p> -->
+
+<div class="full" style="display: flex; height: 80vh; flex-direction: row">
+  <!-- vs code above -->
+  <iframe
+    src="http://localhost/"
+    style="width: 50%; height: 100%; border: none"
+  ></iframe>
+
+  <!-- browser below -->
+  <iframe
+    src="https://www.google.com"
+    style="width: 50%; height: 100%; border: none"
+  ></iframe>
+</div>
+
+<script>
+  function runTests(event) {
+    event.preventDefault();
+    let res = fetch("http:\/\/127.0.0.1:5000/run-tests")
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.error) {
+          document.querySelector("#test-results").innerHTML = res.error;
+        } else {
+          document.querySelector("#test-results").innerHTML = res.output;
+        }
+      });
+  }
+</script>
+
+<button
+  onclick="event.preventDefault();fetch('http:\/\/127.0.0.1:5000/setup-exp1')"
+>
+  Setup Script 1
+</button>
+
+<button
+  onclick="event.preventDefault();fetch('http:\/\/127.0.0.1:5000/setup-exp2')"
+>
+  Setup Script 2
+</button>
+
+<button onclick="runTests(event)">Run Tests</button>
+
+<button
+  onclick="event.preventDefault();fetch('http:\/\/127.0.0.1:5000/takedown-exp1')"
+>
+  Takedown Script 1
+</button>
+
+<button
+  onclick="event.preventDefault();fetch('http:\/\/127.0.0.1:5000/takedown-exp2')"
+>
+  Takedown Script 2
+</button>
+
+<button
+  class="btn btn-primary"
+  onclick="document.getElementById('next-button').click();"
+>
+  Continue
+</button>
+
+<div id="test-results"></div>
+
+{% endblock %}

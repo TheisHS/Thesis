@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %} {% block content %}
+
+<h1>Break</h1>
+
+<!-- <p><strong>Time Remaining: </strong> <span id="timer"></span></p> -->
+
+<p>Please sit still, focus on the video and relax. <span id="timer"></span>.</p>
+
+<iframe
+  src="https://www.youtube.com/embed/-CDH2fN7XXA?si=XQdrFJUFLXuNqHrH&amp;controls=0&amp;start=414&autoplay=1"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+  class="wide"
+></iframe>
+
+<button
+  class="btn btn-primary"
+  onclick="document.getElementById('next-button').click();"
+>
+  Continue
+</button>
+
+<style>
+  iframe {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+  }
+</style>
+
+{% endblock %}

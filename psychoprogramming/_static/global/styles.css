@@ -1,0 +1,27 @@
+.otree-body {
+  max-width: 100vw;
+}
+
+._otree-content {
+  max-width: 100vw;
+  overflow-x: hidden;
+  display: grid;
+  grid-template-columns: [full-start] auto [wide-start] 100px [main-start] 900px [main-end] 100px [wide-end] auto [full-end];
+}
+
+.otree-body * {
+  grid-column: main;
+}
+
+.otree-body .wide {
+  grid-column: wide;
+}
+
+.otree-body .full {
+  grid-column: full;
+}
+
+.otree-title,
+.otree-timer {
+  display: none;
+}
