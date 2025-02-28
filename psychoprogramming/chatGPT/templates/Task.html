@@ -1,26 +1,11 @@
 {% extends "global/Page.html" %} {% block content %}
 
-<h1>Programming Task 1</h1>
-
-<!-- <p><strong>Time Remaining: </strong> <span id="timer"></span></p> -->
-
-<div class="full" style="display: flex; height: 80vh; flex-direction: row">
-  <!-- vs code above -->
-  <iframe
-    src="http://localhost/"
-    style="width: 50%; height: 100%; border: none"
-  ></iframe>
-
-  <!-- browser below -->
-  <iframe
-    src="https://www.google.com"
-    style="width: 50%; height: 100%; border: none"
-  ></iframe>
-</div>
+<h1 style="display: none">Programming Task 1</h1>
 
 <script>
   function runTests(event) {
     event.preventDefault();
+    document.querySelector("#test-results").innerHTML = "Running tests...";
     let res = fetch("http:\/\/127.0.0.1:5000/run-tests")
       .then((res) => res.json())
       .then((res) => {
@@ -31,10 +16,43 @@
         }
       });
   }
+
+  function iframeReset(event) {
+    event.preventDefault();
+    document.getElementById("browser").src = "https://www.google.com/";
+  }
+
+  function showTask(event) {
+    event.preventDefault();
+    document.querySelector("dialog").setAttribute("open", "true");
+  }
+  function hideTask(event) {
+    event.preventDefault();
+    document.querySelector("dialog").removeAttribute("open");
+  }
 </script>
 
-<button onclick="runTests(event)">Run Tests</button>
-<div id="test-results"></div>
+<div class="full split-window">
+  <div>
+    <button onclick="showTask(event)">Show UML diagrams</button>
+    <button onclick="runTests(event)">Run Tests</button>
+    <div id="test-results"></div>
+  </div>
+  <div>
+    {% if useAI %}{%else%}
+    <button onclick="iframeReset(event)">Go to Google frontpage</button>
+    {% endif %}
+  </div>
+
+  <!-- vs code above -->
+  <iframe src="http://localhost/"></iframe>
+
+  <!-- browser below -->
+
+  {% if useAI %}{%else%}
+  <iframe src="https://www.google.com/" id="browser"></iframe>
+  {% endif %}
+</div>
 
 <button
   class="btn btn-primary"
@@ -42,5 +60,36 @@
 >
   Continue
 </button>
+
+<dialog>
+  <button style="float: right" onclick="hideTask(event)">Close</button>
+  {% if id == 1 %} {% include "TaskDescription1.html" %} {% else %} {% include
+  "TaskDescription2.html" %} {% endif %}
+</dialog>
+
+<style>
+  .split-window {
+    height: calc(100vh);
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-auto-rows: min-content;
+  }
+  .split-window div {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    gap: 6px;
+  }
+  iframe {
+    width: 100%;
+    height: calc(100vh - 50px);
+    border: none;
+  }
+  dialog {
+    top: 50%;
+    translate: 0px -50%;
+    max-width: 90vw;
+  }
+</style>
 
 {% endblock %}

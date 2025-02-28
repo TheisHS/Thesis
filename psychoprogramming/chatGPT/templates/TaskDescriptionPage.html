@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %} {% block content %}
+
+<h1>Programming Task {{ id }}</h1>
+
+<p>
+  Your task is described below. You have 3 minutes to read it now, but you will
+  be able to access it while solving the task as well.
+</p>
+
+{% if id == 1 %} {% include "TaskDescription1.html" %} {% else %} {% include
+"TaskDescription2.html" %} {% endif %}
+
+<button
+  class="btn btn-primary"
+  onclick="document.getElementById('next-button').click();"
+>
+  Continue
+</button>
+
+{% endblock %}
