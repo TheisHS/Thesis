@@ -33,31 +33,8 @@
   }
 </script>
 
-<button
-  onclick="event.preventDefault();fetch('http:\/\/127.0.0.1:5000/setup-exp1')"
->
-  Setup Script 1
-</button>
-
-<button
-  onclick="event.preventDefault();fetch('http:\/\/127.0.0.1:5000/setup-exp2')"
->
-  Setup Script 2
-</button>
-
 <button onclick="runTests(event)">Run Tests</button>
-
-<button
-  onclick="event.preventDefault();fetch('http:\/\/127.0.0.1:5000/takedown-exp1')"
->
-  Takedown Script 1
-</button>
-
-<button
-  onclick="event.preventDefault();fetch('http:\/\/127.0.0.1:5000/takedown-exp2')"
->
-  Takedown Script 2
-</button>
+<div id="test-results"></div>
 
 <button
   class="btn btn-primary"
@@ -65,7 +42,5 @@
 >
   Continue
 </button>
-
-<div id="test-results"></div>
 
 {% endblock %}
