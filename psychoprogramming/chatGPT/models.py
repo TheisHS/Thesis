@@ -13,20 +13,3 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     feedback = models.LongStringField(blank=True)
-
-# PAGES
-class Instructions(Page):
-    pass
-
-class Task(Page):
-    timeout_seconds = 20*60
-    pass
-
-class Break(Page):
-    pass
-
-class Survey(Page):
-    form_model = 'player'
-    form_fields = ['feedback']
-
-page_sequence = [Instructions, Task, Break, Survey]
