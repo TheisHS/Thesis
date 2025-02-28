@@ -1,6 +1,5 @@
 from otree.api import *
-import os
-import time
+import requests, os, time
 
 class Instructions(Page):
     timeout_seconds = 5*60
@@ -16,7 +15,11 @@ class TaskDescription1(Page):
             useAI = False,
         )
 
-class Task(Page):
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        requests.get('http://host.docker.internal:5000/setup-exp1')
+
+class Task1(Page):
     """The main developer task with a split-screen setup"""
     timeout_seconds = 20*60
     template_name = 'chatGPT/templates/Task.html'
@@ -26,6 +29,10 @@ class Task(Page):
         return dict(
             useAI = False,
         )
+
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        requests.get('http://host.docker.internal:5000/takedown-exp1')
 
 class Break1(Page):
     """Break screen before task description"""
@@ -43,4 +50,4 @@ class Survey(Page):
     form_fields = ['feedback']
     template_name = 'chatGPT/templates/Survey.html'
 
-page_sequence = [Instructions, Break1, TaskDescription1, Task, Break2, Survey]
+page_sequence = [Instructions, Break1, TaskDescription1, Task1, Break2, Survey]
