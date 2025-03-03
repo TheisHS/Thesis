@@ -10,3 +10,7 @@ The browser extension [Requestly](https://chromewebstore.google.com/detail/reque
 - Remove response header "x-frame-options"
 
 This is necessary for the iframes to work.
+
+### OpenAI API Key
+
+The system running this should have a .env file in the root folder with an environment variable like this: `OPENAI_API_KEY=<key here>`.

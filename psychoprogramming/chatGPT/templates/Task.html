@@ -49,7 +49,7 @@
 
   <!-- browser below -->
 
-  {% if useAI %}{%else%}
+  {% if useAI %} {% include "ChatGPT.html" %} {%else%}
   <iframe src="https://www.google.com/" id="browser"></iframe>
   {% endif %}
 </div>
