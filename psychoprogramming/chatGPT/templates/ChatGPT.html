@@ -1,0 +1,106 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+  }
+  .chat-container {
+    width: 400px;
+    max-width: 90%;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    height: 400px;
+  }
+  .message {
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin: 5px 0;
+    max-width: 80%;
+  }
+  .user {
+    background: #007bff;
+    color: white;
+    align-self: flex-end;
+  }
+  .bot {
+    background: #e9ecef;
+    color: black;
+    align-self: flex-start;
+  }
+  .input-container {
+    margin-top: 10px;
+    display: flex;
+    width: 400px;
+    max-width: 90%;
+  }
+  input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  button {
+    padding: 10px;
+    border: none;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 5px;
+  }
+</style>
+
+<div class="chat-container" id="chatBox"></div>
+
+<div class="input-container">
+  <input
+    type="text"
+    id="userInput"
+    placeholder="Type a message..."
+    onkeypress="handleKeyPress(event)"
+  />
+  <button onclick="sendMessage(event)">Send</button>
+</div>
+
+<script>
+  async function sendMessage(event) {
+    event.preventDefault();
+    const inputField = document.getElementById("userInput");
+    const chatBox = document.getElementById("chatBox");
+    const userMessage = inputField.value.trim();
+
+    if (userMessage === "") return;
+
+    chatBox.innerHTML += `<div class="message user">${userMessage}</div>`;
+    inputField.value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    try {
+      const response = await fetch("http:\/\/127.0.0.1:5000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage }),
+      });
+
+      const data = await response.json();
+      const botMessage = data.reply;
+
+      chatBox.innerHTML += `<div class="message bot">${botMessage}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    } catch (error) {
+      chatBox.innerHTML += `<div class="message bot">Error: Could not reach chatbot.</div>`;
+    }
+  }
+
+  function handleKeyPress(event) {
+    if (event.key === "Enter") sendMessage();
+  }
+</script>

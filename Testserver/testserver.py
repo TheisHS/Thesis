@@ -1,6 +1,8 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 import subprocess
+import os
+from openai import OpenAI
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
@@ -50,6 +52,33 @@ def takedown_exp2():
     except subprocess.CalledProcessError as e:
         return jsonify({"error": str(e), "output": e.output}), 500   
 
+
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+conversation_history = [
+    {"role": "developer", "content": "You are a helpful assistant."},
+]
+
+@app.route("/chat", methods=["POST"])
+@cross_origin(supports_credentials=True)
+def chat():
+    user_message = request.json.get("message")
+    conversation_history.append({"role": "user", "content": user_message})
+
+    client = OpenAI(
+        api_key=os.environ.get("OPENAI_API_KEY"),
+    )
+
+    response = client.chat.completions.create(
+        messages=conversation_history,
+        model="gpt-4o-mini",
+    )
+
+    bot_reply = response.choices[0].message.content
+    """ We can use this if we care about tracking token usage 
+    usage = response.usage.{prompt_tokens,completions_tokens,total_tokens}"""
+    conversation_history.append({"role": "assistant", "content": bot_reply})
+
+    return jsonify({"reply": bot_reply})
 
 if __name__ == "__main__":
     app.run(port=5000, host='0.0.0.0')

@@ -6,6 +6,8 @@ services:
       context: ./Testserver
     ports:
       - "5000:5000"
+    env_file:
+      - .env
     volumes:
       - ./config:/config
       - ./Experiment1/src:/templates/exp1
