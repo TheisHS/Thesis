@@ -55,6 +55,8 @@
     margin-left: 5px;
   }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+
 <div class="chat-container" id="chatBox"></div>
 
 <div class="input-container">
@@ -89,8 +91,11 @@
 
       const data = await response.json();
       const botMessage = data.reply;
+      var converter = new showdown.Converter(),
+        text = botMessage,
+        html = converter.makeHtml(text);
 
-      chatBox.innerHTML += `<div class="message bot">${botMessage}</div>`;
+      chatBox.innerHTML += `<div class="message bot">${html}</div>`;
       chatBox.scrollTop = chatBox.scrollHeight;
     } catch (error) {
       chatBox.innerHTML += `<div class="message bot">Error: Could not reach chatbot.</div>`;
