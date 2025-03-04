@@ -24,14 +24,14 @@ services:
       - internal
 
   code-server:
-    image: lscr.io/linuxserver/code-server:latest
+    build:
+      context: ./code-server
     container_name: code-server
     restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - PASSWORD=mysecretpassword # Change this!
       - DOCKER_MODS=linuxserver/mods:code-server-extension-arguments
       - VSCODE_EXTENSION_IDS=redhat.java
     volumes:
