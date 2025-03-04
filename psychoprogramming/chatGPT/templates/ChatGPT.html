@@ -1,82 +1,35 @@
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    background-color: #f4f4f4;
-  }
-  .chat-container {
-    max-width: 90%;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    height: 90%;
-  }
-  .message {
-    padding: 8px 12px;
-    border-radius: 10px;
-    margin: 5px 0;
-    max-width: 80%;
-  }
-  .user {
-    background: #007bff;
-    color: white;
-    align-self: flex-end;
-  }
-  .bot {
-    background: #e9ecef;
-    color: black;
-    align-self: flex-start;
-  }
-  .input-container {
-    margin-top: 10px;
-    display: flex;
-    width: 400px;
-    max-width: 90%;
-  }
-  input {
-    flex: 1;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  button {
-    padding: 10px;
-    border: none;
-    background: #007bff;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-left: 5px;
-  }
-</style>
 <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
 
-<div class="chat-container" id="chatBox"></div>
+<div class="chat-container" id="chatBox">
+  <div class="initial">
+    You can chat with ChatGPT 4o-mini by typing in a message below.
+  </div>
+</div>
+
+<div>
+  <div id="gpt-loading" class="dot-typing"></div>
+</div>
 
 <div class="input-container">
   <input
     type="text"
-    id="userInput"
+    id="gpt-input"
     placeholder="Type a message..."
     onkeypress="handleKeyPress(event)"
   />
-  <button onclick="sendMessage(event)">Send</button>
+  <button onclick="sendMessage(event)"></button>
 </div>
 
 <script>
   async function sendMessage(event) {
     event.preventDefault();
-    const inputField = document.getElementById("userInput");
+    const inputField = document.getElementById("gpt-input");
     const chatBox = document.getElementById("chatBox");
     const userMessage = inputField.value.trim();
 
     if (userMessage === "") return;
+
+    document.getElementById("gpt-loading").style.visibility = "visible";
 
     chatBox.innerHTML += `<div class="message user">${userMessage}</div>`;
     inputField.value = "";
@@ -98,11 +51,158 @@
       chatBox.innerHTML += `<div class="message bot">${html}</div>`;
       chatBox.scrollTop = chatBox.scrollHeight;
     } catch (error) {
+      console.log(error);
       chatBox.innerHTML += `<div class="message bot">Error: Could not reach chatbot.</div>`;
+    } finally {
+      document.getElementById("gpt-loading").style.visibility = "hidden";
     }
   }
-
-  function handleKeyPress(event) {
-    if (event.key === "Enter") sendMessage();
-  }
 </script>
+
+<style>
+  .gpt-window > * {
+    padding: 0px 15px;
+  }
+
+  .gpt-window .chat-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - 60px);
+    overflow-y: auto;
+    padding-bottom: 40px;
+  }
+
+  .gpt-window .chat-container:has(.message) .initial {
+    display: none;
+  }
+  .gpt-window .chat-container .initial {
+    font-size: 24px;
+    text-align: center;
+    align-self: center;
+    padding: 140px;
+  }
+
+  .gpt-window .message {
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin: 5px 0;
+    max-width: 80%;
+  }
+  .gpt-window .message h2 {
+    font-size: 1.4rem;
+  }
+  .gpt-window .message h3 {
+    font-size: 1.2rem;
+  }
+  .gpt-window .message pre {
+    font-family: inherit;
+    scrollbar-color: rgba(250, 245, 255, 0.7) rgba(0, 0, 0, 0);
+  }
+  .gpt-window .message pre:has(code) {
+    background: rgba(5, 2, 10, 0.6);
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: white;
+  }
+  .message.user {
+    background: var(--bs-blue);
+    color: white;
+    align-self: flex-end;
+  }
+  .message.bot {
+    background: #e9ecef;
+    color: black;
+    align-self: flex-start;
+  }
+
+  .message:nth-child(2) {
+    margin-top: 20px;
+  }
+  .message::before {
+    position: absolute;
+    top: -18px;
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 12px;
+  }
+  .message.user::before {
+    content: "you";
+    right: 12px;
+  }
+  .message.bot::before {
+    content: "chatGPT 4o-mini";
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+  .gpt-window .input-container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+  .gpt-window input {
+    flex: 1;
+    padding: 10px 16px;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+  }
+
+  .gpt-window .input-container button {
+    background: url(https://www.svgrepo.com/show/27797/right-arrow.svg) center /
+      50% no-repeat transparent;
+    box-shadow: 0 0 10px -6px;
+    width: 46px;
+    border: none;
+    border-radius: 50%;
+    transition: all 0.2s;
+  }
+  .gpt-window .input-container button:hover {
+    box-shadow: 0 0 10px -3px;
+  }
+
+  .dot-typing {
+    position: relative;
+    margin-bottom: 10px;
+    margin-top: -20px;
+    left: -9975px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--bs-blue);
+    color: var(--bs-blue);
+    box-shadow: 9984px 0 0 0 var(--bs-blue), 9999px 0 0 0 var(--bs-blue),
+      10014px 0 0 0 var(--bs-blue);
+    animation: dot-typing 1.5s infinite linear;
+    visibility: hidden;
+  }
+
+  @keyframes dot-typing {
+    0% {
+      box-shadow: 9984px 0 0 0 var(--bs-blue), 9999px 0 0 0 var(--bs-blue),
+        10014px 0 0 0 var(--bs-blue);
+    }
+    16.667% {
+      box-shadow: 9984px -10px 0 0 var(--bs-blue), 9999px 0 0 0 var(--bs-blue),
+        10014px 0 0 0 var(--bs-blue);
+    }
+    33.333% {
+      box-shadow: 9984px 0 0 0 var(--bs-blue), 9999px 0 0 0 var(--bs-blue),
+        10014px 0 0 0 var(--bs-blue);
+    }
+    50% {
+      box-shadow: 9984px 0 0 0 var(--bs-blue), 9999px -10px 0 0 var(--bs-blue),
+        10014px 0 0 0 var(--bs-blue);
+    }
+    66.667% {
+      box-shadow: 9984px 0 0 0 var(--bs-blue), 9999px 0 0 0 var(--bs-blue),
+        10014px 0 0 0 var(--bs-blue);
+    }
+    83.333% {
+      box-shadow: 9984px 0 0 0 var(--bs-blue), 9999px 0 0 0 var(--bs-blue),
+        10014px -10px 0 0 var(--bs-blue);
+    }
+    100% {
+      box-shadow: 9984px 0 0 0 var(--bs-blue), 9999px 0 0 0 var(--bs-blue),
+        10014px 0 0 0 var(--bs-blue);
+    }
+  }
+</style>
