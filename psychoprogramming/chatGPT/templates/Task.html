@@ -30,6 +30,24 @@
     event.preventDefault();
     document.querySelector("dialog").removeAttribute("open");
   }
+
+  document.addEventListener("keydown", function (event) {
+    if (
+      event.key === "Enter" &&
+      event.target.tagName !== "INPUT" &&
+      event.target.tagName !== "TEXTAREA"
+    ) {
+      event.preventDefault();
+      showTask(event);
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && event.target.tagName === "INPUT") {
+      event.preventDefault();
+      sendMessage(event);
+    }
+  });
 </script>
 
 <div class="full split-window">
