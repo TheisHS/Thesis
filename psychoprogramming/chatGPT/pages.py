@@ -69,12 +69,12 @@ class Task2(Page):
 
 class Break1(Page):
     """Break screen before task description"""
-    timeout_seconds = 2*60 
+    timeout_seconds = 30
     template_name = 'chatGPT/templates/Break.html'
 
 class Break2(Page):
     """Break screen before task description"""
-    timeout_seconds = 2*60
+    timeout_seconds = 30
     template_name = 'chatGPT/templates/Break.html'
 
 class Survey(Page):
