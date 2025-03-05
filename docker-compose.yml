@@ -9,9 +9,10 @@ services:
     env_file:
       - .env
     volumes:
-      - ./config:/config
+      - config:/config
       - ./Experiment1/src:/templates/exp1
       - ./Experiment2/src:/templates/exp2
+      - ./results:/results
     networks:
       - internal
 
@@ -35,7 +36,7 @@ services:
       - DOCKER_MODS=linuxserver/mods:code-server-extension-arguments
       - VSCODE_EXTENSION_IDS=redhat.java
     volumes:
-      - ./config:/config
+      - config:/config
       - ./Experiment1/src:/templates/exp1
       - ./Experiment2/src:/templates/exp2
     networks:
@@ -59,3 +60,6 @@ services:
 networks:
   internal:
     driver: bridge
+
+volumes:
+  config:

@@ -16,4 +16,5 @@ merge.ps1
 *.otreezip
 **/*.log
 config/*
+results/*
 *.env
