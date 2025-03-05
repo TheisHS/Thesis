@@ -1,2 +1,12 @@
-{{ extends "global/Page.html" }} {{ load otree }} {{ block global_styles }} {{
-endblock }} {{ block global_scripts }} {{ endblock }}
+{% extends "global/Page.html" %} {% block content %}
+
+<h1>Thank you</h1>
+
+<button
+  class="btn btn-primary"
+  onclick="document.getElementById('next-button').click();"
+>
+  Continue
+</button>
+
+{% endblock %}

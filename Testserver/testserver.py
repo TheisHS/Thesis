@@ -52,6 +52,15 @@ def takedown_exp2():
     except subprocess.CalledProcessError as e:
         return jsonify({"error": str(e), "output": e.output}), 500   
 
+@app.route('/save-results')
+@cross_origin(supports_credentials=True)
+def save_results():
+    try:
+        result = subprocess.run(["./save-results.sh"], capture_output=True, text=True, check=True)
+        return jsonify({"output": result.stdout})
+    except subprocess.CalledProcessError as e:
+        return jsonify({"error": str(e), "output": e.output}), 500   
+
 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 conversation_history = [

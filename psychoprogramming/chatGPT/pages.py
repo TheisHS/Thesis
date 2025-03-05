@@ -83,4 +83,8 @@ class Survey(Page):
     form_fields = ['feedback']
     template_name = 'chatGPT/templates/Survey.html'
 
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        requests.get('http://host.docker.internal:5000/save-results')
+
 page_sequence = [Instructions, Break1, TaskDescription1, Task1, Break2, TaskDescription2, Task2, Survey]

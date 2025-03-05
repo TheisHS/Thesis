@@ -1,7 +1,7 @@
 #!/bin/bash
 
-mkdir -p /config/results/exp$1/task
-cp /config/workspace/* /config/results/exp$1/task
+mkdir -p /results/exp$1
+cp /config/workspace/* /results/exp$1
 rm -rf /config/workspace/*
 
 rm -rf /testing/task/*
