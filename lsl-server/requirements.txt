@@ -1,0 +1,3 @@
+pylsl
+flask
+flask-cors
