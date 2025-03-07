@@ -3,22 +3,22 @@ version: "3.8"
 services:
   flask:
     build:
-      context: ./Testserver
+      context: ./exp-server
     ports:
       - "5000:5000"
     env_file:
       - .env
     volumes:
       - config:/config
-      - ./Experiment1/src:/templates/exp1
-      - ./Experiment2/src:/templates/exp2
+      - ./java-src/Experiment1/src:/templates/exp1
+      - ./java-src/Experiment2/src:/templates/exp2
       - ./results:/results
     networks:
       - internal
 
   otree:
     build:
-      context: ./psychoprogramming
+      context: ./otree
     ports:
       - "8000:8000"
     networks:
@@ -37,8 +37,8 @@ services:
       - VSCODE_EXTENSION_IDS=redhat.java
     volumes:
       - config:/config
-      - ./Experiment1/src:/templates/exp1
-      - ./Experiment2/src:/templates/exp2
+      - ./java-src/Experiment1/src:/templates/exp1
+      - ./java-src/Experiment2/src:/templates/exp2
     networks:
       - internal
     expose:

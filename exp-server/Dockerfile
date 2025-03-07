@@ -1,4 +1,4 @@
-# Testserver/Dockerfile
+# exp-server/Dockerfile
 FROM naddinadja/jdk-python:latest
 
 WORKDIR /app
@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-CMD ["python3", "-u", "testserver.py"]
+CMD ["python3", "-u", "server.py"]

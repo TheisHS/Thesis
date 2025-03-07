@@ -3,9 +3,9 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='chatGPT',
-        display_name="Programming tasks with ChatGPT",
-        app_sequence=['chatGPT'],
+        name='experiment',
+        display_name="Programming tasks with and without ChatGPT",
+        app_sequence=['experiment'],
         num_demo_participants=30,
     ),
 ]

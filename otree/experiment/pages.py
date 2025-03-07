@@ -3,11 +3,11 @@ import requests, os, time
 
 class Instructions(Page):
     timeout_seconds = 5*60
-    template_name = 'chatGPT/templates/Instructions.html'
+    template_name = 'experiment/templates/Instructions.html'
 
 class TaskDescription2(Page):
     timeout_seconds = 3*60
-    template_name = 'chatGPT/templates/TaskDescriptionPage.html'
+    template_name = 'experiment/templates/TaskDescriptionPage.html'
 
     @staticmethod
     def vars_for_template(player):
@@ -22,7 +22,7 @@ class TaskDescription2(Page):
 
 class TaskDescription1(Page):
     timeout_seconds = 3*60
-    template_name = 'chatGPT/templates/TaskDescriptionPage.html'
+    template_name = 'experiment/templates/TaskDescriptionPage.html'
 
     @staticmethod
     def vars_for_template(player):
@@ -38,7 +38,7 @@ class TaskDescription1(Page):
 class Task1(Page):
     """The main developer task with a split-screen setup"""
     timeout_seconds = 20*60
-    template_name = 'chatGPT/templates/Task.html'
+    template_name = 'experiment/templates/Task.html'
     
     @staticmethod
     def vars_for_template(player):
@@ -54,7 +54,7 @@ class Task1(Page):
 class Task2(Page):
     """The main developer task with a split-screen setup"""
     timeout_seconds = 20*60
-    template_name = 'chatGPT/templates/Task.html'
+    template_name = 'experiment/templates/Task.html'
     
     @staticmethod
     def vars_for_template(player):
@@ -70,18 +70,18 @@ class Task2(Page):
 class Break1(Page):
     """Break screen before task description"""
     timeout_seconds = 30
-    template_name = 'chatGPT/templates/Break.html'
+    template_name = 'experiment/templates/Break.html'
 
 class Break2(Page):
     """Break screen before task description"""
     timeout_seconds = 30
-    template_name = 'chatGPT/templates/Break.html'
+    template_name = 'experiment/templates/Break.html'
 
 class Survey(Page):
     """Post-task questionnaire"""
     form_model = 'player'
     form_fields = ['feedback']
-    template_name = 'chatGPT/templates/Survey.html'
+    template_name = 'experiment/templates/Survey.html'
 
     @staticmethod
     def before_next_page(player, timeout_happened):
