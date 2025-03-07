@@ -3,10 +3,19 @@
 <h1 style="display: none">Programming Task 1</h1>
 
 <script>
+  sendEvent("taskBegin");
+
+  document.getElementById("browser").addEventListener("click", () => {
+    sendEvent("googleClicked");
+  });
+
+  document.getElementById("editor").addEventListener("click", () => {
+    sendEvent("editorClicked");
+  });
   function runTests(event) {
     event.preventDefault();
     document.querySelector("#test-results").innerHTML = "Running tests...";
-    let res = fetch("http:\/\/127.0.0.1:5000/run-tests")
+    let res = fetch("http://127.0.0.1:5000/run-tests")
       .then((res) => res.json())
       .then((res) => {
         if (res.error) {
@@ -15,6 +24,7 @@
           document.querySelector("#test-results").innerHTML = res.output;
         }
       });
+    sendEvent("runTests");
   }
 
   function iframeReset(event) {
@@ -25,10 +35,12 @@
   function showTask(event) {
     event.preventDefault();
     document.querySelector("dialog").setAttribute("open", "true");
+    sendEvent("showTask");
   }
   function hideTask(event) {
     event.preventDefault();
     document.querySelector("dialog").removeAttribute("open");
+    sendEvent("hideTask");
   }
 
   document.addEventListener("keydown", function (event) {
@@ -66,7 +78,7 @@
   </div>
 
   <!-- vs code above -->
-  <iframe src="http://localhost/"></iframe>
+  <iframe id="editor" src="http://localhost/"></iframe>
 
   <!-- browser below -->
 

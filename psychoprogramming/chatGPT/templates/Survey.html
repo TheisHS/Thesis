@@ -1,6 +1,6 @@
 {% extends "global/Page.html" %} {% block content %}
 
-<h1>Thank you</h1>
+<h1>Thank you, the experiment is over</h1>
 
 <button
   class="btn btn-primary"
@@ -8,5 +8,9 @@
 >
   Continue
 </button>
+
+<script>
+  sendEvent("done");
+</script>
 
 {% endblock %}
