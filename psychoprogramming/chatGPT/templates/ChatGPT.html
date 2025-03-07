@@ -16,6 +16,7 @@
     id="gpt-input"
     placeholder="Type a message..."
     onkeypress="handleKeyPress(event)"
+    onfocus="sendEvent('GPTStartPrompting');"
   />
   <button onclick="sendMessage(event)"></button>
 </div>
@@ -30,13 +31,13 @@
     if (userMessage === "") return;
 
     document.getElementById("gpt-loading").style.visibility = "visible";
+    sendEvent("GPTSentPrompt");
 
     chatBox.innerHTML += `<div class="message user">${userMessage}</div>`;
     inputField.value = "";
     chatBox.scrollTop = chatBox.scrollHeight;
-
     try {
-      const response = await fetch("http:\/\/127.0.0.1:5000/chat", {
+      const response = await fetch("http://127.0.0.1:5000/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: userMessage }),
@@ -49,6 +50,7 @@
         html = converter.makeHtml(text);
 
       chatBox.innerHTML += `<div class="message bot">${html}</div>`;
+      sendEvent("GPTReceiveText");
       chatBox.scrollTop = chatBox.scrollHeight;
     } catch (error) {
       console.log(error);
