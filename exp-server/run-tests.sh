@@ -11,4 +11,4 @@ done
 cd /testing
 javac /testing/task/*.java
 javac /testing/tests/*.java
-java task.Main
+java tests.Main
