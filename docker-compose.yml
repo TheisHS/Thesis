@@ -21,6 +21,8 @@ services:
       context: ./otree
     ports:
       - "8000:8000"
+    environment:
+      - AI_FIRST=False
     networks:
       - internal
 

@@ -11,7 +11,8 @@
 2. Run the `lsl-server` and start
 
    ```sh
-   python lsl-server/server.py & docker compose up --build
+   python lsl-server/server.py
+   docker compose up --build
    ```
 
 ## Components

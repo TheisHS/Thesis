@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %} {% block content %}
+
+<script>
+  sendEvent("eyeCalibrationPageBegin");
+</script>
+
+<h1>Eye tracker calibration</h1>
+
+<p>
+  We will now do calibration of the eye tracker. The screen will turn black and
+  a white dot will appear. Please follow the dot with your eyes.
+</p>
+
+<p>Do not click anything.</p>
+
+<button class="btn btn-primary" id="next-button">Continue</button>
+
+<script>
+  document.addEventListener("keydown", function (event) {
+    console.log(event.key);
+    if (event.key === "k") {
+      document.getElementById("next-button").click();
+    }
+  });
+</script>
+
+<style></style>
+
+{% endblock %}
