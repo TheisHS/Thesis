@@ -23,6 +23,9 @@ services:
       - "8000:8000"
     environment:
       - AI_FIRST=False
+    volumes:
+      - ./java-src/Experiment1/img:/app/_static/exp1
+      - ./java-src/Experiment2/img:/app/_static/exp2
     networks:
       - internal
 
@@ -39,8 +42,6 @@ services:
       - VSCODE_EXTENSION_IDS=redhat.java
     volumes:
       - config:/config
-      - ./java-src/Experiment1/src:/templates/exp1
-      - ./java-src/Experiment2/src:/templates/exp2
     networks:
       - internal
     expose:
