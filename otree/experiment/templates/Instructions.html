@@ -43,15 +43,16 @@
   appears.
 </p>
 
-<button
-  class="btn btn-primary"
-  onclick="document.getElementById('next-button').click();"
->
-  Continue
-</button>
+<button id="next-button" class="btn btn-primary">Continue</button>
 
 <script>
   sendEvent("instructions");
+</script>
+
+<script>
+  if (js_vars.debug) {
+    document.body.classList.add("debug");
+  }
 </script>
 
 <style>

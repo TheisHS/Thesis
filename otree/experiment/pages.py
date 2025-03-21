@@ -1,14 +1,26 @@
 from otree.api import *
-import requests, os, time
+import requests, os
 
 class Instructions(Page):
     timeout_seconds = 3*60
     template_name = 'experiment/templates/Instructions.html'
 
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+        )
+
 class TaskDescription1(Page):
     timeout_seconds = 3*60
     template_name = 'experiment/templates/TaskDescriptionPage.html'
 
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+        )
+    
     @staticmethod
     def vars_for_template(player):
         return dict(
@@ -25,6 +37,12 @@ class TaskDescription2(Page):
     template_name = 'experiment/templates/TaskDescriptionPage.html'
 
     @staticmethod
+    def js_vars(player):
+        return dict(
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+        )
+
+    @staticmethod
     def vars_for_template(player):
         return dict(
             id = 2,
@@ -39,12 +57,18 @@ class Task1(Page):
     """The main developer task with a split-screen setup"""
     timeout_seconds = 20*60
     template_name = 'experiment/templates/Task.html'
+
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+        )
     
     @staticmethod
     def vars_for_template(player):
         return dict(
-            useAI = os.getenv('AI_FIRST', 'True').lower() == 'true',
             id = 1,
+            useAI = os.getenv('AI_FIRST', 'True').lower() == 'true',
         )
 
     @staticmethod
@@ -55,12 +79,18 @@ class Task2(Page):
     """The main developer task with a split-screen setup"""
     timeout_seconds = 20*60
     template_name = 'experiment/templates/Task.html'
+
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+        )
     
     @staticmethod
     def vars_for_template(player):
         return dict(
-            useAI = os.getenv('AI_FIRST', 'False').lower() != 'true',
             id = 2,
+            useAI = os.getenv('AI_FIRST', 'False').lower() != 'true',
         )
 
     @staticmethod
@@ -72,24 +102,52 @@ class Break1(Page):
     timeout_seconds = 30
     template_name = 'experiment/templates/Break.html'
 
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+        )
+
 class Break2(Page):
     """Break screen before task description"""
     timeout_seconds = 30
     template_name = 'experiment/templates/Break.html'
 
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+        )
+
 class EyeCalibration1(Page):
     """Break screen before task description"""
     template_name = 'experiment/templates/EyeCalibration.html'
+
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+        )
 
 class EyeCalibration2(Page):
     """Break screen before task description"""
     template_name = 'experiment/templates/EyeCalibration.html'
 
-class Survey(Page):
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+        )
+
+class End(Page):
     """Post-task questionnaire"""
-    form_model = 'player'
-    form_fields = ['feedback']
-    template_name = 'experiment/templates/Survey.html'
+    template_name = 'experiment/templates/End.html'
+
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+        )
 
     @staticmethod
     def before_next_page(player, timeout_happened):
@@ -105,5 +163,5 @@ page_sequence = [
     Break2,
     TaskDescription2,
     Task2,
-    Survey
+    End
 ]

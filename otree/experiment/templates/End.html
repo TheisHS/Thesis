@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %} {% block content %}
+
+<script>
+  sendEvent("done");
+</script>
+
+<h1>Well done!</h1>
+
+<p>
+  The experiment is over. Please click the button below and wait for us to come
+  help you out of the equipment.
+</p>
+
+<p>Thank you for your participation.</p>
+
+<button class="btn btn-primary end">Finish</button>
+
+<script>
+  if (js_vars.debug) {
+    document.body.classList.add("debug");
+  }
+</script>
+
+<style>
+  button.end {
+    position: static;
+    margin-top: 20px;
+  }
+</style>
+
+{% endblock %}
