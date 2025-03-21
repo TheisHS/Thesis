@@ -89,6 +89,7 @@
   {% if id == 1 %} {% include "TaskDescription1.html" %} {% else %} {% include
   "TaskDescription2.html" %} {% endif %}
 </dialog>
+<div id="background" onclick="hideTask(event)"></div>
 
 <script>
   if (js_vars.debug) {
@@ -132,6 +133,7 @@
     top: 50%;
     translate: 0px -50%;
     max-width: 90vw;
+    z-index: 1;
   }
   dialog button.close {
     float: right;
@@ -143,6 +145,18 @@
   }
   dialog button.close:hover {
     background: rgb(220, 220, 220);
+  }
+  #background {
+    display: none;
+  }
+  dialog[open] + #background {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
   }
 </style>
 
