@@ -19,6 +19,7 @@ class TaskDescription1(Page):
     def js_vars(player):
         return dict(
             debug = os.getenv('DEBUG', 'False').lower() == 'true',
+            useAI = os.getenv('AI_FIRST', 'True').lower() == 'true',
         )
     
     @staticmethod
@@ -40,6 +41,7 @@ class TaskDescription2(Page):
     def js_vars(player):
         return dict(
             debug = os.getenv('DEBUG', 'False').lower() == 'true',
+            useAI = os.getenv('AI_FIRST', 'True').lower() == 'true',
         )
 
     @staticmethod
@@ -62,6 +64,7 @@ class Task1(Page):
     def js_vars(player):
         return dict(
             debug = os.getenv('DEBUG', 'False').lower() == 'true',
+            useAI = os.getenv('AI_FIRST', 'True').lower() == 'true',
         )
     
     @staticmethod
@@ -84,6 +87,7 @@ class Task2(Page):
     def js_vars(player):
         return dict(
             debug = os.getenv('DEBUG', 'False').lower() == 'true',
+            useAI = os.getenv('AI_FIRST', 'True').lower() == 'true',
         )
     
     @staticmethod
