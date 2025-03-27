@@ -1,39 +1,24 @@
 {% extends "global/Page.html" %} {% block content %}
 
-<h1 style="display: none">Programming Task 1</h1>
+<h1 style="display: none">Test Setup</h1>
 
 <script>
-  sendEvent("taskBegin");
-
   function runTests(event) {
     event.preventDefault();
     document.querySelector("#test-results").innerHTML = "Running tests...";
-    sendEvent("runTests");
-    fetch("http://127.0.0.1:5000/run-tests")
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.error) {
-          document.querySelector("#test-results").innerHTML = res.error;
-        } else {
-          document.querySelector("#test-results").innerHTML = res.output;
-        }
-      });
-  }
-
-  function iframeReset(event) {
-    event.preventDefault();
-    document.getElementById("browser").src = "https://www.google.com/";
+    setTimeout(function () {
+      document.querySelector("#test-results").innerHTML =
+        "There are no tests this time! :)";
+    }, 2000);
   }
 
   function showTask(event) {
     event.preventDefault();
     document.querySelector("dialog").setAttribute("open", "true");
-    sendEvent("showTask");
   }
   function hideTask(event) {
     event.preventDefault();
     document.querySelector("dialog").removeAttribute("open");
-    sendEvent("hideTask");
   }
 
   document.addEventListener("keydown", function (event) {
@@ -45,17 +30,6 @@
       event.preventDefault();
     }
   });
-
-  document.addEventListener("keydown", function (event) {
-    if (
-      event.key === "Enter" &&
-      event.target.tagName === "INPUT" &&
-      event.target.id === "gpt-input"
-    ) {
-      event.preventDefault();
-      sendMessage(event);
-    }
-  });
 </script>
 
 <div class="full split-window">
@@ -64,30 +38,58 @@
     <button onclick="runTests(event)">Run Tests</button>
     <div id="test-results"></div>
   </div>
-  <div class="menu">
-    {% if useAI %}{%else%}
-    <button onclick="iframeReset(event)">Go to Google frontpage</button>
-    {% endif %}
-  </div>
+  <div class="menu"></div>
 
-  <!-- vs code above -->
+  <!-- vs code left -->
   <iframe id="editor" src="http://localhost/"></iframe>
 
-  <!-- browser below -->
+  <!-- instructions right -->
+  <div class="test-task">
+    <h2>Test task</h2>
+    <p>
+      This is a test page that allows you to get familiar with the layout of the
+      tasks that you will solve during the experiment.
+    </p>
+    <p>
+      When solving a task, the screen will be split in two like you are seeing
+      now. On the left side, you will have access to Visual Studio Code, and on
+      the right side you will have tools available to support you. This will
+      either be the LLM ChatGPT 4o-mini, or a browser window, starting on
+      Google's frontpage. It will be clear from the task description, which of
+      the two will be available. If you have access to the web browser, you are
+      not allowed to access any AI-tools. Doing so will make your participation
+      invalid.
+    </p>
+    <p>
+      For the programming tasks, there will be some Java files in VS Code, when
+      you enter the page. These should not and cannot be edited.
+    </p>
 
-  {% if useAI %}
-  <div class="gpt-window">{% include "ChatGPT.html" %}</div>
-  {% else %}
-  <iframe src="https://www.google.com/" id="browser"></iframe>
-  {% endif %}
+    <h3>Try it out</h3>
+    <p>To get familiar with the layout, you can try out the following steps:</p>
+    <ol>
+      <li>Create a Java class with a main method.</li>
+      <li>
+        Check the example task description on "Show UML diagrams". You should
+        not implement the shown systems.
+      </li>
+      <li>Create the function below</li>
+      <pre>
+public static int add(int a, int b) {
+    return a + b;
+}</pre
+      >
+      <li>Run the tests with the button "Run Tests".</li>
+      <li>Delete the Java file that you created.</li>
+    </ol>
+  </div>
 </div>
 
-<button id="next-button" class="btn btn-primary">Continue</button>
+<button class="btn btn-primary">Continue</button>
 
 <dialog>
   <button class="close" onclick="hideTask(event)">✕</button>
-  {% if id == 1 %} {% include "TaskDescription1.html" %} {% else %} {% include
-  "TaskDescription2.html" %} {% endif %}
+  {% include "TestTaskDescription.html" %}
 </dialog>
 <div id="background" onclick="hideTask(event)"></div>
 
@@ -123,12 +125,19 @@
     box-shadow: 0 0 10px -3px;
   }
   iframe,
-  .gpt-window {
+  .test-task {
     width: 100%;
     max-width: 50vw;
     height: calc(100vh - 50px);
     border: none;
+  }
+  .test-task {
+    padding: 20px;
     border-left: 1px solid black;
+  }
+  pre {
+    background: #d7d7d7;
+    padding: 14px;
   }
   dialog {
     top: 50%;

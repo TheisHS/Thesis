@@ -1,13 +1,21 @@
 from otree.api import *
 import requests, os
 
+class TestSetup(Page):
+    template_name = 'experiment/templates/TestSetup.html'
+
+    @staticmethod
+    def js_vars(player):
+        return dict(
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+        )
 class Instructions(Page):
     template_name = 'experiment/templates/Instructions.html'
 
     @staticmethod
     def js_vars(player):
         return dict(
-            debug = 'true',
+            debug = os.getenv('DEBUG', 'False').lower() == 'true',
         )
 
 class TaskDescription1(Page):
@@ -157,6 +165,7 @@ class End(Page):
         requests.get('http://host.docker.internal:5000/save-results')
 
 page_sequence = [
+    TestSetup,
     Instructions,
     EyeCalibration1,
     Break1,
