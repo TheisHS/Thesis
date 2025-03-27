@@ -2,13 +2,12 @@ from otree.api import *
 import requests, os
 
 class Instructions(Page):
-    timeout_seconds = 3*60
     template_name = 'experiment/templates/Instructions.html'
 
     @staticmethod
     def js_vars(player):
         return dict(
-            debug = os.getenv('DEBUG', 'False').lower() == 'true',
+            debug = 'true',
         )
 
 class TaskDescription1(Page):
