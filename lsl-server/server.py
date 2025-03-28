@@ -1,3 +1,4 @@
+import json
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 from pylsl import StreamInfo, StreamOutlet
@@ -22,6 +23,10 @@ key_info = StreamInfo(name='keylogger', type='Markers', channel_count=1, nominal
                   channel_format='string', source_id='keylogger123')
 key_outlet = StreamOutlet(key_info)
 
+tlx_info = StreamInfo(name='NASA-TLX', type='Markers', channel_count=8, nominal_srate=0, 
+                  channel_format='string', source_id='nasa-tlx123')
+tlx_outlet = StreamOutlet(tlx_info)
+
 
 @app.route("/send-lsl-event", methods=["POST"])
 @cross_origin(supports_credentials=True)
@@ -29,6 +34,17 @@ def send_event():
   event = request.json.get("event")
   print("Received event", event)
   otree_outlet.push_sample([event])
+  return jsonify({"status": "success"})
+
+@app.route("/submit-tlx", methods=["POST"])
+@cross_origin(supports_credentials=True)
+def submit_tlx():
+  print("submit_tlx")
+  taskId = request.json.get("taskId")
+  useAI = request.json.get("useAI")
+  formAnswers: dict[str, int] = request.json.get("formAnswers")
+  print("Received NASA TLX answers, sending event", [str(taskId), str(useAI), *list(formAnswers.values())])
+  tlx_outlet.push_sample([str(taskId), str(useAI), *list(formAnswers.values())])
   return jsonify({"status": "success"})
 
 

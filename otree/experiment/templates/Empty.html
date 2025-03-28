@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %} {% block content %}
+
+<button class="btn btn-primary" id="next-button">Continue</button>
+
+<script>
+  document.addEventListener("keydown", function (event) {
+    console.log(event.key);
+    if (event.key === "k") {
+      document.getElementById("next-button").click();
+    }
+  });
+  if (js_vars.debug) {
+    document.body.classList.add("debug");
+  }
+</script>
+
+{% endblock %}
