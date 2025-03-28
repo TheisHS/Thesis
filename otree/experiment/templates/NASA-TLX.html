@@ -1,0 +1,267 @@
+{% extends "global/Page.html" %} {% block content %}
+
+<script>
+  sendEvent("nasatlxBegin");
+
+  function submit(event) {
+    event.preventDefault();
+
+    const mental = document.querySelector(
+      'input[name="mental"]:checked'
+    )?.value;
+    const physical = document.querySelector(
+      'input[name="physical"]:checked'
+    )?.value;
+    const temporal = document.querySelector(
+      'input[name="temporal"]:checked'
+    )?.value;
+    const performance = document.querySelector(
+      'input[name="performance"]:checked'
+    )?.value;
+    const effort = document.querySelector(
+      'input[name="effort"]:checked'
+    )?.value;
+    const frustration = document.querySelector(
+      'input[name="frustration"]:checked'
+    )?.value;
+
+    if (
+      !mental ||
+      !physical ||
+      !temporal ||
+      !performance ||
+      !effort ||
+      !frustration
+    ) {
+      alert("Please rate all items.");
+      return;
+    }
+
+    const body = {
+      taskId: js_vars.id,
+      useAI: js_vars.useAI,
+      formAnswers: {
+        mental,
+        physical,
+        temporal,
+        performance,
+        effort,
+        frustration,
+      },
+    };
+    fetch("http://localhost/submit-tlx", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    document.getElementById("next-button").click();
+  }
+</script>
+
+<h1>NASA Task Load Index (task {{ id }})</h1>
+
+<p>Please rate the following six items.</p>
+
+<h2>Mental Demand</h2>
+<p>How mentally demanding was the task?</p>
+<div class="radiogroup">
+  <label for="mental0">Very low</label>
+  <input type="radio" name="mental" value="0" id="mental0" />
+  <input type="radio" name="mental" value="1" id="mental1" />
+  <input type="radio" name="mental" value="2" id="mental2" />
+  <input type="radio" name="mental" value="3" id="mental3" />
+  <input type="radio" name="mental" value="4" id="mental4" />
+  <input type="radio" name="mental" value="5" id="mental5" />
+  <input type="radio" name="mental" value="6" id="mental6" />
+  <input type="radio" name="mental" value="7" id="mental7" />
+  <input type="radio" name="mental" value="8" id="mental8" />
+  <input type="radio" name="mental" value="9" id="mental9" />
+  <input type="radio" name="mental" value="10" id="mental10" />
+  <input type="radio" name="mental" value="11" id="mental11" />
+  <input type="radio" name="mental" value="12" id="mental12" />
+  <input type="radio" name="mental" value="13" id="mental13" />
+  <input type="radio" name="mental" value="14" id="mental14" />
+  <input type="radio" name="mental" value="15" id="mental15" />
+  <input type="radio" name="mental" value="16" id="mental16" />
+  <input type="radio" name="mental" value="17" id="mental17" />
+  <input type="radio" name="mental" value="18" id="mental18" />
+  <input type="radio" name="mental" value="19" id="mental19" />
+  <input type="radio" name="mental" value="20" id="mental20" />
+  <label for="mental20">Very high</label>
+</div>
+
+<h2>Physical Demand</h2>
+<p>How physically demanding was the task?</p>
+<div class="radiogroup">
+  <label for="physical0">Very low</label>
+  <input type="radio" name="physical" value="0" id="physical0" />
+  <input type="radio" name="physical" value="1" id="physical1" />
+  <input type="radio" name="physical" value="2" id="physical2" />
+  <input type="radio" name="physical" value="3" id="physical3" />
+  <input type="radio" name="physical" value="4" id="physical4" />
+  <input type="radio" name="physical" value="5" id="physical5" />
+  <input type="radio" name="physical" value="6" id="physical6" />
+  <input type="radio" name="physical" value="7" id="physical7" />
+  <input type="radio" name="physical" value="8" id="physical8" />
+  <input type="radio" name="physical" value="9" id="physical9" />
+  <input type="radio" name="physical" value="10" id="physical10" />
+  <input type="radio" name="physical" value="11" id="physical11" />
+  <input type="radio" name="physical" value="12" id="physical12" />
+  <input type="radio" name="physical" value="13" id="physical13" />
+  <input type="radio" name="physical" value="14" id="physical14" />
+  <input type="radio" name="physical" value="15" id="physical15" />
+  <input type="radio" name="physical" value="16" id="physical16" />
+  <input type="radio" name="physical" value="17" id="physical17" />
+  <input type="radio" name="physical" value="18" id="physical18" />
+  <input type="radio" name="physical" value="19" id="physical19" />
+  <input type="radio" name="physical" value="20" id="physical20" />
+  <label for="physical20">Very high</label>
+</div>
+
+<h2>Temporal Demand</h2>
+<p>How hurried or rushed was the pace of the task?</p>
+<div class="radiogroup">
+  <label for="temporal0">Very low</label>
+  <input type="radio" name="temporal" value="0" id="temporal0" />
+  <input type="radio" name="temporal" value="1" id="temporal1" />
+  <input type="radio" name="temporal" value="2" id="temporal2" />
+  <input type="radio" name="temporal" value="3" id="temporal3" />
+  <input type="radio" name="temporal" value="4" id="temporal4" />
+  <input type="radio" name="temporal" value="5" id="temporal5" />
+  <input type="radio" name="temporal" value="6" id="temporal6" />
+  <input type="radio" name="temporal" value="7" id="temporal7" />
+  <input type="radio" name="temporal" value="8" id="temporal8" />
+  <input type="radio" name="temporal" value="9" id="temporal9" />
+  <input type="radio" name="temporal" value="10" id="temporal10" />
+  <input type="radio" name="temporal" value="11" id="temporal11" />
+  <input type="radio" name="temporal" value="12" id="temporal12" />
+  <input type="radio" name="temporal" value="13" id="temporal13" />
+  <input type="radio" name="temporal" value="14" id="temporal14" />
+  <input type="radio" name="temporal" value="15" id="temporal15" />
+  <input type="radio" name="temporal" value="16" id="temporal16" />
+  <input type="radio" name="temporal" value="17" id="temporal17" />
+  <input type="radio" name="temporal" value="18" id="temporal18" />
+  <input type="radio" name="temporal" value="19" id="temporal19" />
+  <input type="radio" name="temporal" value="20" id="temporal20" />
+  <label for="temporal20">Very high</label>
+</div>
+
+<h2>Performance</h2>
+<p>How successful were you in accomplishing what you were asked to do?</p>
+<div class="radiogroup">
+  <label for="performance0">Perfect</label>
+  <input type="radio" name="performance" value="0" id="performance0" />
+  <input type="radio" name="performance" value="1" id="performance1" />
+  <input type="radio" name="performance" value="2" id="performance2" />
+  <input type="radio" name="performance" value="3" id="performance3" />
+  <input type="radio" name="performance" value="4" id="performance4" />
+  <input type="radio" name="performance" value="5" id="performance5" />
+  <input type="radio" name="performance" value="6" id="performance6" />
+  <input type="radio" name="performance" value="7" id="performance7" />
+  <input type="radio" name="performance" value="8" id="performance8" />
+  <input type="radio" name="performance" value="9" id="performance9" />
+  <input type="radio" name="performance" value="10" id="performance10" />
+  <input type="radio" name="performance" value="11" id="performance11" />
+  <input type="radio" name="performance" value="12" id="performance12" />
+  <input type="radio" name="performance" value="13" id="performance13" />
+  <input type="radio" name="performance" value="14" id="performance14" />
+  <input type="radio" name="performance" value="15" id="performance15" />
+  <input type="radio" name="performance" value="16" id="performance16" />
+  <input type="radio" name="performance" value="17" id="performance17" />
+  <input type="radio" name="performance" value="18" id="performance18" />
+  <input type="radio" name="performance" value="19" id="performance19" />
+  <input type="radio" name="performance" value="20" id="performance20" />
+  <label for="performance20">Failure</label>
+</div>
+
+<h2>Effort</h2>
+<p>How hard did you have to work to accomplish your level of performance?</p>
+<div class="radiogroup">
+  <label for="effort0">Very low</label>
+  <input type="radio" name="effort" value="0" id="effort0" />
+  <input type="radio" name="effort" value="1" id="effort1" />
+  <input type="radio" name="effort" value="2" id="effort2" />
+  <input type="radio" name="effort" value="3" id="effort3" />
+  <input type="radio" name="effort" value="4" id="effort4" />
+  <input type="radio" name="effort" value="5" id="effort5" />
+  <input type="radio" name="effort" value="6" id="effort6" />
+  <input type="radio" name="effort" value="7" id="effort7" />
+  <input type="radio" name="effort" value="8" id="effort8" />
+  <input type="radio" name="effort" value="9" id="effort9" />
+  <input type="radio" name="effort" value="10" id="effort10" />
+  <input type="radio" name="effort" value="11" id="effort11" />
+  <input type="radio" name="effort" value="12" id="effort12" />
+  <input type="radio" name="effort" value="13" id="effort13" />
+  <input type="radio" name="effort" value="14" id="effort14" />
+  <input type="radio" name="effort" value="15" id="effort15" />
+  <input type="radio" name="effort" value="16" id="effort16" />
+  <input type="radio" name="effort" value="17" id="effort17" />
+  <input type="radio" name="effort" value="18" id="effort18" />
+  <input type="radio" name="effort" value="19" id="effort19" />
+  <input type="radio" name="effort" value="20" id="effort20" />
+  <label for="effort20">Very high</label>
+</div>
+
+<h2>Frustration</h2>
+<p>How insecure, discouraged, irritated, stressed and annoyed were you?</p>
+<div class="radiogroup">
+  <label for="frustration0">Very low</label>
+  <input type="radio" name="frustration" value="0" id="frustration0" />
+  <input type="radio" name="frustration" value="1" id="frustration1" />
+  <input type="radio" name="frustration" value="2" id="frustration2" />
+  <input type="radio" name="frustration" value="3" id="frustration3" />
+  <input type="radio" name="frustration" value="4" id="frustration4" />
+  <input type="radio" name="frustration" value="5" id="frustration5" />
+  <input type="radio" name="frustration" value="6" id="frustration6" />
+  <input type="radio" name="frustration" value="7" id="frustration7" />
+  <input type="radio" name="frustration" value="8" id="frustration8" />
+  <input type="radio" name="frustration" value="9" id="frustration9" />
+  <input type="radio" name="frustration" value="10" id="frustration10" />
+  <input type="radio" name="frustration" value="11" id="frustration11" />
+  <input type="radio" name="frustration" value="12" id="frustration12" />
+  <input type="radio" name="frustration" value="13" id="frustration13" />
+  <input type="radio" name="frustration" value="14" id="frustration14" />
+  <input type="radio" name="frustration" value="15" id="frustration15" />
+  <input type="radio" name="frustration" value="16" id="frustration16" />
+  <input type="radio" name="frustration" value="17" id="frustration17" />
+  <input type="radio" name="frustration" value="18" id="frustration18" />
+  <input type="radio" name="frustration" value="19" id="frustration19" />
+  <input type="radio" name="frustration" value="20" id="frustration20" />
+  <label for="frustration20">Very high</label>
+</div>
+
+<div onclick="submit(event)" class="submit btn btn-primary">Submit</div>
+<button style="display: none" id="next-button">Continue</button>
+
+<script>
+  if (js_vars.debug) {
+    document.body.classList.add("debug");
+  }
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  });
+</script>
+
+<style>
+  .radiogroup {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  .radiogroup input[type="radio"] {
+    cursor: pointer;
+  }
+  .submit {
+    position: static;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  h2 {
+    font-size: 1.1em;
+  }
+</style>
+
+{% endblock %}
