@@ -1,3 +1,4 @@
-pylsl
 flask
 flask-cors
+pylsl
+pynput
