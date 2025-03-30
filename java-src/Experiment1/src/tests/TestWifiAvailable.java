@@ -2,23 +2,23 @@ package tests;
 
 import task.*;
 
-public class TestITUAvailable extends Test  {
+public class TestWifiAvailable extends Test  {
   // both connectable
-  // should be ITU++
+  // should be Wifi
   public int test1() {
-    DeviceAPI.API = new DeviceAPI_ITU();
+    DeviceAPI.API = new DeviceAPI_Wifi();
     ConnectionAPI.API = new ConnectionAPI_Both();
 
     Device d = new Device();
     d.connect();
-    return d.connection instanceof ITUPlusPlus ? 1 : 0;
+    return d.connection instanceof Wifi ? 1 : 0;
   }
 
-  // Eduroam connectable
+  // MobileData connectable
   // should throw exception
   public int test2() {
-    DeviceAPI.API = new DeviceAPI_ITU();
-    ConnectionAPI.API = new ConnectionAPI_Eduroam();
+    DeviceAPI.API = new DeviceAPI_Wifi();
+    ConnectionAPI.API = new ConnectionAPI_MobileData();
     
     Device d = new Device();
     try {
@@ -29,21 +29,21 @@ public class TestITUAvailable extends Test  {
     return 0;
   }
 
-  // ITU connectable
-  // should be ITU++
+  // Wifi connectable
+  // should be Wifi
   public int test3() {
-    DeviceAPI.API = new DeviceAPI_ITU();
-    ConnectionAPI.API = new ConnectionAPI_ITU();
+    DeviceAPI.API = new DeviceAPI_Wifi();
+    ConnectionAPI.API = new ConnectionAPI_Wifi();
 
     Device d = new Device();
     d.connect();
-    return d.connection instanceof ITUPlusPlus ? 1 : 0;
+    return d.connection instanceof Wifi ? 1 : 0;
   }
 
   // None connectable
   // should throw exception
   public int test4() {
-    DeviceAPI.API = new DeviceAPI_ITU();
+    DeviceAPI.API = new DeviceAPI_Wifi();
     ConnectionAPI.API = new ConnectionAPI_None();
 
     Device d = new Device();

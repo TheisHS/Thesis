@@ -3,13 +3,12 @@ package tests;
 import task.DeviceAPI;
 import java.util.*;
 
-public class DeviceAPI_ITUEdu extends DeviceAPI {
+public class DeviceAPI_MobileData extends DeviceAPI {
   @Override
   public ArrayList<String> getAvailableConnections() {
     ArrayList<String> connections = new ArrayList<>();
 
-    connections.add("ituplusplus");
-    connections.add("eduroam");
+    connections.add("mobiledata");
 
     return connections;
   }
