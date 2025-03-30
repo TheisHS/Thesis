@@ -7,13 +7,13 @@ public class Device {
 
   public void connect() {
     ArrayList<String> available = DeviceAPI.API.getAvailableConnections();
-    if (available.contains("ituplusplus")) {
-      connection = new ITUPlusPlus();
+    if (available.contains("wifi")) {
+      connection = new Wifi();
       boolean success = connection.connect();
       if (success) return;
     } 
-    if (available.contains("eduroam")) {
-      connection = new Eduroam();
+    if (available.contains("mobiledata")) {
+      connection = new MobileData();
       boolean success = connection.connect();
       if (success) return;
     } 
