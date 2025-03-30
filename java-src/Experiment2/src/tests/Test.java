@@ -1,13 +1,15 @@
 package tests;
 
 public abstract class Test {
-  private static int TOTAL_TESTS = 10;
+  private static int TOTAL_TESTS = 17;
 
   public static void testAll() {
     int success = 0;
-    success += new TestPay_AnalogTicket().test();
-    success += new TestPay_ScrollBarVoucher().test();
-    success += new Test_AnalogTicketAdapter().test();
+    success += new Test_MemberCard().test();
+    success += new Test_CreditCard().test();
+    success += new Test_ShopItem().test();
+    success += new Test_ShoppingCart_Buy().test();
+    success += new Test_ShoppingCart_Stock().test();
     System.out.println(String.format("%d/%d tests passed", success, TOTAL_TESTS));
   }
 
