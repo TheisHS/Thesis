@@ -1,7 +1,7 @@
 {% extends "global/Page.html" %} {% block content %}
 
 <script>
-  sendEvent("nasatlxBegin");
+  sendEvent("nasatlxBegin", js_vars.useAI);
 
   function submit(event) {
     event.preventDefault();

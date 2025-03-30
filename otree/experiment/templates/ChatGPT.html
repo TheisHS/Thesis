@@ -15,7 +15,7 @@
     type="text"
     id="gpt-input"
     placeholder="Type a message..."
-    onfocus="sendEvent('GPTStartPrompting');"
+    onfocus="sendEvent('GPTStartPrompting', true);"
   />
   <button onclick="sendMessage(event)"></button>
 </div>
@@ -30,7 +30,7 @@
     if (userMessage === "") return;
 
     document.getElementById("gpt-loading").style.visibility = "visible";
-    sendEvent("GPTSentPrompt");
+    sendEvent("GPTSentPrompt", true);
 
     chatBox.innerHTML += `<div class="message user">${userMessage}</div>`;
     inputField.value = "";
@@ -49,7 +49,7 @@
         html = converter.makeHtml(text);
 
       chatBox.innerHTML += `<div class="message bot">${html}</div>`;
-      sendEvent("GPTReceiveText");
+      sendEvent("GPTReceiveText", true);
       chatBox.scrollTop = chatBox.scrollHeight;
     } catch (error) {
       console.log(error);

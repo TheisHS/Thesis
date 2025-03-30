@@ -1,11 +1,11 @@
 {{ extends "otree/Page.html" }} {{ load otree }} {{ block global_styles }}
 <link rel="stylesheet" href="{{ static 'global/styles.css' }}" />
 <script>
-  function sendEvent(eventString) {
+  function sendEvent(eventString, isAI) {
     fetch("http://localhost/send-lsl-event", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ event: eventString }),
+      body: JSON.stringify({ event: eventString, isAI }),
     });
   }
 </script>

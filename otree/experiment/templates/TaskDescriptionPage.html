@@ -1,7 +1,7 @@
 {% extends "global/Page.html" %} {% block content %}
 
 <script>
-  sendEvent("taskDescription");
+  sendEvent("taskDescription", js_vars.useAI);
 </script>
 
 <h1>Programming Task {{ id }}</h1>

@@ -7,9 +7,13 @@ from pynput import keyboard, mouse
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
-otree_info = StreamInfo(name='oTree', type='Markers', channel_count=1, nominal_srate=0, 
+otree_info = StreamInfo(name='oTree', type='Markers', channel_count=2, nominal_srate=0, 
                   channel_format='string', source_id='oTree123')
 otree_outlet = StreamOutlet(otree_info)
+
+gpt_info = StreamInfo(name='GPT', type='Markers', channel_count=1, nominal_srate=0, 
+                  channel_format='string', source_id='gpt123')
+gpt_outlet = StreamOutlet(gpt_info)
 
 click_info = StreamInfo(name='mouseclicklogger', type='Markers', channel_count=1, nominal_srate=0, 
                   channel_format='string', source_id='mouselogger_click123')
@@ -31,9 +35,15 @@ tlx_outlet = StreamOutlet(tlx_info)
 @app.route("/send-lsl-event", methods=["POST"])
 @cross_origin(supports_credentials=True)
 def send_event():
-  event = request.json.get("event")
+  event: str = request.json.get("event")
+  ai: str = request.json.get("isAI")
   print("Received event", event)
-  otree_outlet.push_sample([event])
+  if event.lower().startswith("gpt"):
+    print("Sending GPT event", event)
+    gpt_outlet.push_sample([event])
+  else:
+    print("Sending oTree event", event)
+    otree_outlet.push_sample([event, str(ai)])
   return jsonify({"status": "success"})
 
 @app.route("/submit-tlx", methods=["POST"])
