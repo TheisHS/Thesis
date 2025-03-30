@@ -4,11 +4,11 @@ import task.ConnectionAPI;
 
 public class ConnectionAPI_None extends ConnectionAPI {
   @Override
-  public boolean isITUPlusPlusAvailable() {
+  public boolean isWifiAvailable() {
     return false;
   }
   @Override
-  public boolean isEduroamAvailable() {
+  public boolean isMobileDataAvailable() {
     return false;
   }
 }

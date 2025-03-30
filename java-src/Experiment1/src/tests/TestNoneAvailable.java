@@ -18,11 +18,11 @@ public class TestNoneAvailable extends Test  {
     return 0;
   }
 
-  // Eduroam connectable
+  // MobileData connectable
   // should throw exception
   public int test2() {
     DeviceAPI.API = new DeviceAPI_None();
-    ConnectionAPI.API = new ConnectionAPI_Eduroam();
+    ConnectionAPI.API = new ConnectionAPI_MobileData();
 
     Device d = new Device();
     try {
@@ -33,11 +33,11 @@ public class TestNoneAvailable extends Test  {
     return 0;
   }
 
-  // ITU connectable
+  // Wifi connectable
   // should throw exception
   public int test3() {
     DeviceAPI.API = new DeviceAPI_None();
-    ConnectionAPI.API = new ConnectionAPI_ITU();
+    ConnectionAPI.API = new ConnectionAPI_Wifi();
 
     Device d = new Device();
     try {

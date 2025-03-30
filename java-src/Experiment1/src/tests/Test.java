@@ -5,10 +5,10 @@ public abstract class Test {
 
   public static void testAll() {
     int success = 0;
-    success += new TestITUEduAvailable().test();
-    success += new TestEduITUAvailable().test();
-    success += new TestITUAvailable().test();
-    success += new TestEduroamAvailable().test();
+    success += new TestWifiMobileAvailable().test();
+    success += new TestMobileWifiAvailable().test();
+    success += new TestWifiAvailable().test();
+    success += new TestMobileDataAvailable().test();
     success += new TestNoneAvailable().test();
     System.out.println(String.format("%d/%d tests passed", success, TOTAL_TESTS));
   }
