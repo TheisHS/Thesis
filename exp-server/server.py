@@ -32,7 +32,9 @@ def run_tests():
         result = subprocess.run(["./run-tests.sh"], capture_output=True, text=True, check=True)
         return jsonify({"output": result.stdout})
     except subprocess.CalledProcessError as e:
-        return jsonify({"error": "Your solution does not compile. Are the class names correct?", "output": e.output}), 200
+        print("stdout:", result.stdout)
+        print("stderr:", result.stderr)
+        return jsonify({"error": "Your solution does not compile. Is everything as described?", "output": result.stdout, "stderr": result.stderr}), 200
 
 @app.route('/takedown-exp1')
 @cross_origin(supports_credentials=True)
