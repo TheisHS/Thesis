@@ -70,6 +70,6 @@ def on_keypress(key):
 
 
 if __name__ == "__main__":
-    mouselistener = mouse.Listener(on_move=on_move, on_click=on_click)
-    keylistener = keyboard.Listener(on_press=on_keypress)
-    app.run(port=4000, host='0.0.0.0')
+  with mouse.Listener(on_move=on_move, on_click=on_click) as mouselistener:
+    with keyboard.Listener(on_press=on_keypress) as keylistener:
+      app.run(port=4000, host='0.0.0.0')

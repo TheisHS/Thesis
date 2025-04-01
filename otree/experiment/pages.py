@@ -48,7 +48,7 @@ class Break1(FirstPages):
     template_name = 'experiment/templates/Break.html'
 
 class TaskDescription1(FirstPages):
-    timeout_seconds = 3*60
+    timeout_seconds = 2*60
     template_name = 'experiment/templates/TaskDescriptionPage.html'
 
     @staticmethod
@@ -100,7 +100,7 @@ class Break2(SecondPages):
     template_name = 'experiment/templates/Break.html'
 
 class TaskDescription2(SecondPages):
-    timeout_seconds = 3*60
+    timeout_seconds = 2*60
     template_name = 'experiment/templates/TaskDescriptionPage.html'
 
     @staticmethod

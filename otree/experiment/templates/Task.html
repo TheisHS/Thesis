@@ -161,4 +161,12 @@
   }
 </style>
 
+<script>
+  // Remove the iframes from the DOM to prevent their beforeunload events from
+  // keeping the participant on the page.
+  window.addEventListener("beforeunload", function (event) {
+    document.querySelectorAll("iframe").forEach((el) => el.remove());
+  });
+</script>
+
 {% endblock %}
