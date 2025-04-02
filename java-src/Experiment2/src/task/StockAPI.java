@@ -12,6 +12,10 @@ public abstract class StockAPI {
   /**
    * Returns an array of the IDs of the ShopItems that are
    * currently in stock.
+   * 
+   * Example usage:
+   *   int[] ids = StockAPI.API.getStockIds();
+   * 
    * @return an array of ShopItem IDs.
    */
   public abstract int[] getStockIds();

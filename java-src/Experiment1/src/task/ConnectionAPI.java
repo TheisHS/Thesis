@@ -9,12 +9,20 @@ public abstract class ConnectionAPI {
   
   /**
    * Returns whether wifi is able to connect at the moment.
+   *
+   * Example usage:
+   *   boolean available = ConnectionAPI.API.isWifiAvailable();
+   * 
    * @return true if wifi is available, false otherwise
    */
   public abstract boolean isWifiAvailable();
 
   /**
    * Returns whether mobile data is able to connect at the moment.
+   *
+   * Example usage:
+   *   boolean available = ConnectionAPI.API.isMobileDataAvailable();
+   * 
    * @return true if mobile data is available, false otherwise
    */
   public abstract boolean isMobileDataAvailable();

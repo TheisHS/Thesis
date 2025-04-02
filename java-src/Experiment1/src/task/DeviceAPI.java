@@ -11,6 +11,10 @@ public abstract class DeviceAPI {
   /**
    * Returns a list of available connections. All names are 
    * lowercase and without spaces.
+   *
+   * Example usage:
+   *   ArrayList<String> connections = DeviceAPI.API.getAvailableConnections();
+   * 
    * @return a list of available connections
    */
   public abstract ArrayList<String> getAvailableConnections();
