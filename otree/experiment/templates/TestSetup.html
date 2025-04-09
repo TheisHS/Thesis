@@ -35,7 +35,7 @@
 <div class="full split-window">
   <div class="menu">
     <button onclick="showTask(event)">Show UML diagrams</button>
-    <button onclick="runTests(event)">Run Tests</button>
+    <button class="run-tests" onclick="runTests(event)">Run Tests</button>
     <div id="test-results"></div>
   </div>
   <div class="menu"></div>
@@ -80,7 +80,7 @@ public static int add(int a, int b) {
     return a + b;
 }</pre
       >
-      <li>
+      <li class="run-tests">
         Run the tests with the button "Run Tests" in the top left of the screen.
       </li>
       <li>Delete the Java file that you created.</li>
@@ -104,6 +104,11 @@ public static int add(int a, int b) {
 </script>
 
 <style>
+  .run-tests,
+  #test-results {
+    display: none;
+  }
+
   .split-window {
     height: calc(100vh);
     display: grid;

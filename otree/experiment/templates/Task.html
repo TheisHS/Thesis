@@ -61,7 +61,7 @@
 <div class="full split-window">
   <div class="menu">
     <button onclick="showTask(event)">Show UML diagrams</button>
-    <button onclick="runTests(event)">Run Tests</button>
+    <button class="run-tests" onclick="runTests(event)">Run Tests</button>
     <div id="test-results"></div>
   </div>
   <div class="menu">
@@ -98,6 +98,11 @@
 </script>
 
 <style>
+  .run-tests,
+  #test-results {
+    display: none;
+  }
+
   .split-window {
     height: calc(100vh);
     display: grid;
