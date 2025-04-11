@@ -6,33 +6,14 @@
   function submit(event) {
     event.preventDefault();
 
-    const mental = document.querySelector(
-      'input[name="mental"]:checked'
-    )?.value;
-    const physical = document.querySelector(
-      'input[name="physical"]:checked'
-    )?.value;
-    const temporal = document.querySelector(
-      'input[name="temporal"]:checked'
-    )?.value;
-    const performance = document.querySelector(
-      'input[name="performance"]:checked'
-    )?.value;
-    const effort = document.querySelector(
-      'input[name="effort"]:checked'
-    )?.value;
-    const frustration = document.querySelector(
-      'input[name="frustration"]:checked'
-    )?.value;
+    const ment = document.querySelector('input[name="ment"]:checked')?.value;
+    const phys = document.querySelector('input[name="phys"]:checked')?.value;
+    const temp = document.querySelector('input[name="temp"]:checked')?.value;
+    const perf = document.querySelector('input[name="perf"]:checked')?.value;
+    const efrt = document.querySelector('input[name="efrt"]:checked')?.value;
+    const frus = document.querySelector('input[name="frus"]:checked')?.value;
 
-    if (
-      !mental ||
-      !physical ||
-      !temporal ||
-      !performance ||
-      !effort ||
-      !frustration
-    ) {
+    if (!ment || !phys || !temp || !perf || !efrt || !frus) {
       alert("Please rate all items.");
       return;
     }
@@ -41,12 +22,12 @@
       taskId: js_vars.id,
       useAI: js_vars.useAI,
       formAnswers: {
-        mental,
-        physical,
-        temporal,
-        performance,
-        effort,
-        frustration,
+        ment,
+        phys,
+        temp,
+        perf,
+        efrt,
+        frus,
       },
     };
     fetch("http://localhost/submit-tlx", {
@@ -62,172 +43,436 @@
 
 <p>Please rate the following six items.</p>
 
-<h2>Mental Demand</h2>
-<p>How mentally demanding was the task?</p>
+<div class="header">
+  <h2>Mental Demand</h2>
+  <p>How mentally demanding was the task?</p>
+</div>
 <div class="radiogroup">
-  <label for="mental0">Very low</label>
-  <input type="radio" name="mental" value="0" id="mental0" />
-  <input type="radio" name="mental" value="1" id="mental1" />
-  <input type="radio" name="mental" value="2" id="mental2" />
-  <input type="radio" name="mental" value="3" id="mental3" />
-  <input type="radio" name="mental" value="4" id="mental4" />
-  <input type="radio" name="mental" value="5" id="mental5" />
-  <input type="radio" name="mental" value="6" id="mental6" />
-  <input type="radio" name="mental" value="7" id="mental7" />
-  <input type="radio" name="mental" value="8" id="mental8" />
-  <input type="radio" name="mental" value="9" id="mental9" />
-  <input type="radio" name="mental" value="10" id="mental10" />
-  <input type="radio" name="mental" value="11" id="mental11" />
-  <input type="radio" name="mental" value="12" id="mental12" />
-  <input type="radio" name="mental" value="13" id="mental13" />
-  <input type="radio" name="mental" value="14" id="mental14" />
-  <input type="radio" name="mental" value="15" id="mental15" />
-  <input type="radio" name="mental" value="16" id="mental16" />
-  <input type="radio" name="mental" value="17" id="mental17" />
-  <input type="radio" name="mental" value="18" id="mental18" />
-  <input type="radio" name="mental" value="19" id="mental19" />
-  <input type="radio" name="mental" value="20" id="mental20" />
-  <label for="mental20">Very high</label>
+  <label for="ment0">Very low</label>
+  <label for="ment0">
+    <input type="radio" name="ment" value="0" id="ment0" /><span>0</span>
+  </label>
+  <label for="ment1">
+    <input type="radio" name="ment" value="1" id="ment1" /><span>1</span>
+  </label>
+  <label for="ment2">
+    <input type="radio" name="ment" value="2" id="ment2" /><span>2</span>
+  </label>
+  <label for="ment3">
+    <input type="radio" name="ment" value="3" id="ment3" /><span>3</span>
+  </label>
+  <label for="ment4">
+    <input type="radio" name="ment" value="4" id="ment4" /><span>4</span>
+  </label>
+  <label for="ment5">
+    <input type="radio" name="ment" value="5" id="ment5" /><span>5</span>
+  </label>
+  <label for="ment6">
+    <input type="radio" name="ment" value="6" id="ment6" /><span>6</span>
+  </label>
+  <label for="ment7">
+    <input type="radio" name="ment" value="7" id="ment7" /><span>7</span>
+  </label>
+  <label for="ment8">
+    <input type="radio" name="ment" value="8" id="ment8" /><span>8</span>
+  </label>
+  <label for="ment9">
+    <input type="radio" name="ment" value="9" id="ment9" /><span>9</span>
+  </label>
+  <label for="ment10">
+    <input type="radio" name="ment" value="10" id="ment10" /><span>10</span>
+  </label>
+  <label for="ment11">
+    <input type="radio" name="ment" value="11" id="ment11" /><span>11</span>
+  </label>
+  <label for="ment12">
+    <input type="radio" name="ment" value="12" id="ment12" /><span>12</span>
+  </label>
+  <label for="ment13">
+    <input type="radio" name="ment" value="13" id="ment13" /><span>13</span>
+  </label>
+  <label for="ment14">
+    <input type="radio" name="ment" value="14" id="ment14" /><span>14</span>
+  </label>
+  <label for="ment15">
+    <input type="radio" name="ment" value="15" id="ment15" /><span>15</span>
+  </label>
+  <label for="ment16">
+    <input type="radio" name="ment" value="16" id="ment16" /><span>16</span>
+  </label>
+  <label for="ment17">
+    <input type="radio" name="ment" value="17" id="ment17" /><span>17</span>
+  </label>
+  <label for="ment18">
+    <input type="radio" name="ment" value="18" id="ment18" /><span>18</span>
+  </label>
+  <label for="ment19">
+    <input type="radio" name="ment" value="19" id="ment19" /><span>19</span>
+  </label>
+  <label for="ment20">
+    <input type="radio" name="ment" value="20" id="ment20" /><span>20</span>
+  </label>
+  <label for="ment20">Very high</label>
 </div>
 
-<h2>Physical Demand</h2>
-<p>How physically demanding was the task?</p>
+<div class="header">
+  <h2>Physical Demand</h2>
+  <p>How physically demanding was the task?</p>
+</div>
 <div class="radiogroup">
-  <label for="physical0">Very low</label>
-  <input type="radio" name="physical" value="0" id="physical0" />
-  <input type="radio" name="physical" value="1" id="physical1" />
-  <input type="radio" name="physical" value="2" id="physical2" />
-  <input type="radio" name="physical" value="3" id="physical3" />
-  <input type="radio" name="physical" value="4" id="physical4" />
-  <input type="radio" name="physical" value="5" id="physical5" />
-  <input type="radio" name="physical" value="6" id="physical6" />
-  <input type="radio" name="physical" value="7" id="physical7" />
-  <input type="radio" name="physical" value="8" id="physical8" />
-  <input type="radio" name="physical" value="9" id="physical9" />
-  <input type="radio" name="physical" value="10" id="physical10" />
-  <input type="radio" name="physical" value="11" id="physical11" />
-  <input type="radio" name="physical" value="12" id="physical12" />
-  <input type="radio" name="physical" value="13" id="physical13" />
-  <input type="radio" name="physical" value="14" id="physical14" />
-  <input type="radio" name="physical" value="15" id="physical15" />
-  <input type="radio" name="physical" value="16" id="physical16" />
-  <input type="radio" name="physical" value="17" id="physical17" />
-  <input type="radio" name="physical" value="18" id="physical18" />
-  <input type="radio" name="physical" value="19" id="physical19" />
-  <input type="radio" name="physical" value="20" id="physical20" />
-  <label for="physical20">Very high</label>
+  <label for="phys0">Very low</label>
+  <label for="phys0">
+    <input type="radio" name="phys" value="0" id="phys0" /><span>0</span>
+  </label>
+  <label for="phys1">
+    <input type="radio" name="phys" value="1" id="phys1" /><span>1</span>
+  </label>
+  <label for="phys2">
+    <input type="radio" name="phys" value="2" id="phys2" /><span>2</span>
+  </label>
+  <label for="phys3">
+    <input type="radio" name="phys" value="3" id="phys3" /><span>3</span>
+  </label>
+  <label for="phys4">
+    <input type="radio" name="phys" value="4" id="phys4" /><span>4</span>
+  </label>
+  <label for="phys5">
+    <input type="radio" name="phys" value="5" id="phys5" /><span>5</span>
+  </label>
+  <label for="phys6">
+    <input type="radio" name="phys" value="6" id="phys6" /><span>6</span>
+  </label>
+  <label for="phys7">
+    <input type="radio" name="phys" value="7" id="phys7" /><span>7</span>
+  </label>
+  <label for="phys8">
+    <input type="radio" name="phys" value="8" id="phys8" /><span>8</span>
+  </label>
+  <label for="phys9">
+    <input type="radio" name="phys" value="9" id="phys9" /><span>9</span>
+  </label>
+  <label for="phys10">
+    <input type="radio" name="phys" value="10" id="phys10" /><span>10</span>
+  </label>
+  <label for="phys11">
+    <input type="radio" name="phys" value="11" id="phys11" /><span>11</span>
+  </label>
+  <label for="phys12">
+    <input type="radio" name="phys" value="12" id="phys12" /><span>12</span>
+  </label>
+  <label for="phys13">
+    <input type="radio" name="phys" value="13" id="phys13" /><span>13</span>
+  </label>
+  <label for="phys14">
+    <input type="radio" name="phys" value="14" id="phys14" /><span>14</span>
+  </label>
+  <label for="phys15">
+    <input type="radio" name="phys" value="15" id="phys15" /><span>15</span>
+  </label>
+  <label for="phys16">
+    <input type="radio" name="phys" value="16" id="phys16" /><span>16</span>
+  </label>
+  <label for="phys17">
+    <input type="radio" name="phys" value="17" id="phys17" /><span>17</span>
+  </label>
+  <label for="phys18">
+    <input type="radio" name="phys" value="18" id="phys18" /><span>18</span>
+  </label>
+  <label for="phys19">
+    <input type="radio" name="phys" value="19" id="phys19" /><span>19</span>
+  </label>
+  <label for="phys20">
+    <input type="radio" name="phys" value="20" id="phys20" /><span>20</span>
+  </label>
+  <label for="phys20">Very high</label>
 </div>
 
-<h2>Temporal Demand</h2>
-<p>How hurried or rushed was the pace of the task?</p>
+<div class="header">
+  <h2>Temporal Demand</h2>
+  <p>How hurried or rushed was the pace of the task?</p>
+</div>
 <div class="radiogroup">
-  <label for="temporal0">Very low</label>
-  <input type="radio" name="temporal" value="0" id="temporal0" />
-  <input type="radio" name="temporal" value="1" id="temporal1" />
-  <input type="radio" name="temporal" value="2" id="temporal2" />
-  <input type="radio" name="temporal" value="3" id="temporal3" />
-  <input type="radio" name="temporal" value="4" id="temporal4" />
-  <input type="radio" name="temporal" value="5" id="temporal5" />
-  <input type="radio" name="temporal" value="6" id="temporal6" />
-  <input type="radio" name="temporal" value="7" id="temporal7" />
-  <input type="radio" name="temporal" value="8" id="temporal8" />
-  <input type="radio" name="temporal" value="9" id="temporal9" />
-  <input type="radio" name="temporal" value="10" id="temporal10" />
-  <input type="radio" name="temporal" value="11" id="temporal11" />
-  <input type="radio" name="temporal" value="12" id="temporal12" />
-  <input type="radio" name="temporal" value="13" id="temporal13" />
-  <input type="radio" name="temporal" value="14" id="temporal14" />
-  <input type="radio" name="temporal" value="15" id="temporal15" />
-  <input type="radio" name="temporal" value="16" id="temporal16" />
-  <input type="radio" name="temporal" value="17" id="temporal17" />
-  <input type="radio" name="temporal" value="18" id="temporal18" />
-  <input type="radio" name="temporal" value="19" id="temporal19" />
-  <input type="radio" name="temporal" value="20" id="temporal20" />
-  <label for="temporal20">Very high</label>
+  <label for="temp0">Very low</label>
+  <label for="temp0">
+    <input type="radio" name="temp" value="0" id="temp0" /><span>0</span>
+  </label>
+  <label for="temp1">
+    <input type="radio" name="temp" value="1" id="temp1" /><span>1</span>
+  </label>
+  <label for="temp2">
+    <input type="radio" name="temp" value="2" id="temp2" /><span>2</span>
+  </label>
+  <label for="temp3">
+    <input type="radio" name="temp" value="3" id="temp3" /><span>3</span>
+  </label>
+  <label for="temp4">
+    <input type="radio" name="temp" value="4" id="temp4" /><span>4</span>
+  </label>
+  <label for="temp5">
+    <input type="radio" name="temp" value="5" id="temp5" /><span>5</span>
+  </label>
+  <label for="temp6">
+    <input type="radio" name="temp" value="6" id="temp6" /><span>6</span>
+  </label>
+  <label for="temp7">
+    <input type="radio" name="temp" value="7" id="temp7" /><span>7</span>
+  </label>
+  <label for="temp8">
+    <input type="radio" name="temp" value="8" id="temp8" /><span>8</span>
+  </label>
+  <label for="temp9">
+    <input type="radio" name="temp" value="9" id="temp9" /><span>9</span>
+  </label>
+  <label for="temp10">
+    <input type="radio" name="temp" value="10" id="temp10" /><span>10</span>
+  </label>
+  <label for="temp11">
+    <input type="radio" name="temp" value="11" id="temp11" /><span>11</span>
+  </label>
+  <label for="temp12">
+    <input type="radio" name="temp" value="12" id="temp12" /><span>12</span>
+  </label>
+  <label for="temp13">
+    <input type="radio" name="temp" value="13" id="temp13" /><span>13</span>
+  </label>
+  <label for="temp14">
+    <input type="radio" name="temp" value="14" id="temp14" /><span>14</span>
+  </label>
+  <label for="temp15">
+    <input type="radio" name="temp" value="15" id="temp15" /><span>15</span>
+  </label>
+  <label for="temp16">
+    <input type="radio" name="temp" value="16" id="temp16" /><span>16</span>
+  </label>
+  <label for="temp17">
+    <input type="radio" name="temp" value="17" id="temp17" /><span>17</span>
+  </label>
+  <label for="temp18">
+    <input type="radio" name="temp" value="18" id="temp18" /><span>18</span>
+  </label>
+  <label for="temp19">
+    <input type="radio" name="temp" value="19" id="temp19" /><span>19</span>
+  </label>
+  <label for="temp20">
+    <input type="radio" name="temp" value="20" id="temp20" /><span>20</span>
+  </label>
+  <label for="temp20">Very high</label>
 </div>
 
-<h2>Performance</h2>
-<p>How successful were you in accomplishing what you were asked to do?</p>
+<div class="header">
+  <h2>Performance</h2>
+  <p>How successful were you in accomplishing what you were asked to do?</p>
+</div>
 <div class="radiogroup">
-  <label for="performance0">Perfect</label>
-  <input type="radio" name="performance" value="0" id="performance0" />
-  <input type="radio" name="performance" value="1" id="performance1" />
-  <input type="radio" name="performance" value="2" id="performance2" />
-  <input type="radio" name="performance" value="3" id="performance3" />
-  <input type="radio" name="performance" value="4" id="performance4" />
-  <input type="radio" name="performance" value="5" id="performance5" />
-  <input type="radio" name="performance" value="6" id="performance6" />
-  <input type="radio" name="performance" value="7" id="performance7" />
-  <input type="radio" name="performance" value="8" id="performance8" />
-  <input type="radio" name="performance" value="9" id="performance9" />
-  <input type="radio" name="performance" value="10" id="performance10" />
-  <input type="radio" name="performance" value="11" id="performance11" />
-  <input type="radio" name="performance" value="12" id="performance12" />
-  <input type="radio" name="performance" value="13" id="performance13" />
-  <input type="radio" name="performance" value="14" id="performance14" />
-  <input type="radio" name="performance" value="15" id="performance15" />
-  <input type="radio" name="performance" value="16" id="performance16" />
-  <input type="radio" name="performance" value="17" id="performance17" />
-  <input type="radio" name="performance" value="18" id="performance18" />
-  <input type="radio" name="performance" value="19" id="performance19" />
-  <input type="radio" name="performance" value="20" id="performance20" />
-  <label for="performance20">Failure</label>
+  <label for="perf0">Perfect</label>
+  <label for="perf0">
+    <input type="radio" name="perf" value="0" id="perf0" /><span>0</span>
+  </label>
+  <label for="perf1">
+    <input type="radio" name="perf" value="1" id="perf1" /><span>1</span>
+  </label>
+  <label for="perf2">
+    <input type="radio" name="perf" value="2" id="perf2" /><span>2</span>
+  </label>
+  <label for="perf3">
+    <input type="radio" name="perf" value="3" id="perf3" /><span>3</span>
+  </label>
+  <label for="perf4">
+    <input type="radio" name="perf" value="4" id="perf4" /><span>4</span>
+  </label>
+  <label for="perf5">
+    <input type="radio" name="perf" value="5" id="perf5" /><span>5</span>
+  </label>
+  <label for="perf6">
+    <input type="radio" name="perf" value="6" id="perf6" /><span>6</span>
+  </label>
+  <label for="perf7">
+    <input type="radio" name="perf" value="7" id="perf7" /><span>7</span>
+  </label>
+  <label for="perf8">
+    <input type="radio" name="perf" value="8" id="perf8" /><span>8</span>
+  </label>
+  <label for="perf9">
+    <input type="radio" name="perf" value="9" id="perf9" /><span>9</span>
+  </label>
+  <label for="perf10">
+    <input type="radio" name="perf" value="10" id="perf10" /><span>10</span>
+  </label>
+  <label for="perf11">
+    <input type="radio" name="perf" value="11" id="perf11" /><span>11</span>
+  </label>
+  <label for="perf12">
+    <input type="radio" name="perf" value="12" id="perf12" /><span>12</span>
+  </label>
+  <label for="perf13">
+    <input type="radio" name="perf" value="13" id="perf13" /><span>13</span>
+  </label>
+  <label for="perf14">
+    <input type="radio" name="perf" value="14" id="perf14" /><span>14</span>
+  </label>
+  <label for="perf15">
+    <input type="radio" name="perf" value="15" id="perf15" /><span>15</span>
+  </label>
+  <label for="perf16">
+    <input type="radio" name="perf" value="16" id="perf16" /><span>16</span>
+  </label>
+  <label for="perf17">
+    <input type="radio" name="perf" value="17" id="perf17" /><span>17</span>
+  </label>
+  <label for="perf18">
+    <input type="radio" name="perf" value="18" id="perf18" /><span>18</span>
+  </label>
+  <label for="perf19">
+    <input type="radio" name="perf" value="19" id="perf19" /><span>19</span>
+  </label>
+  <label for="perf20">
+    <input type="radio" name="perf" value="20" id="perf20" /><span>20</span>
+  </label>
+  <label for="perf20">Failure</label>
 </div>
 
-<h2>Effort</h2>
-<p>How hard did you have to work to accomplish your level of performance?</p>
+<div class="header">
+  <h2>Effort</h2>
+  <p>How hard did you have to work to accomplish your level of performance?</p>
+</div>
 <div class="radiogroup">
-  <label for="effort0">Very low</label>
-  <input type="radio" name="effort" value="0" id="effort0" />
-  <input type="radio" name="effort" value="1" id="effort1" />
-  <input type="radio" name="effort" value="2" id="effort2" />
-  <input type="radio" name="effort" value="3" id="effort3" />
-  <input type="radio" name="effort" value="4" id="effort4" />
-  <input type="radio" name="effort" value="5" id="effort5" />
-  <input type="radio" name="effort" value="6" id="effort6" />
-  <input type="radio" name="effort" value="7" id="effort7" />
-  <input type="radio" name="effort" value="8" id="effort8" />
-  <input type="radio" name="effort" value="9" id="effort9" />
-  <input type="radio" name="effort" value="10" id="effort10" />
-  <input type="radio" name="effort" value="11" id="effort11" />
-  <input type="radio" name="effort" value="12" id="effort12" />
-  <input type="radio" name="effort" value="13" id="effort13" />
-  <input type="radio" name="effort" value="14" id="effort14" />
-  <input type="radio" name="effort" value="15" id="effort15" />
-  <input type="radio" name="effort" value="16" id="effort16" />
-  <input type="radio" name="effort" value="17" id="effort17" />
-  <input type="radio" name="effort" value="18" id="effort18" />
-  <input type="radio" name="effort" value="19" id="effort19" />
-  <input type="radio" name="effort" value="20" id="effort20" />
-  <label for="effort20">Very high</label>
+  <label for="efrt0">Very low</label>
+  <label for="efrt0">
+    <input type="radio" name="efrt" value="0" id="efrt0" /><span>0</span>
+  </label>
+  <label for="efrt1">
+    <input type="radio" name="efrt" value="1" id="efrt1" /><span>1</span>
+  </label>
+  <label for="efrt2">
+    <input type="radio" name="efrt" value="2" id="efrt2" /><span>2</span>
+  </label>
+  <label for="efrt3">
+    <input type="radio" name="efrt" value="3" id="efrt3" /><span>3</span>
+  </label>
+  <label for="efrt4">
+    <input type="radio" name="efrt" value="4" id="efrt4" /><span>4</span>
+  </label>
+  <label for="efrt5">
+    <input type="radio" name="efrt" value="5" id="efrt5" /><span>5</span>
+  </label>
+  <label for="efrt6">
+    <input type="radio" name="efrt" value="6" id="efrt6" /><span>6</span>
+  </label>
+  <label for="efrt7">
+    <input type="radio" name="efrt" value="7" id="efrt7" /><span>7</span>
+  </label>
+  <label for="efrt8">
+    <input type="radio" name="efrt" value="8" id="efrt8" /><span>8</span>
+  </label>
+  <label for="efrt9">
+    <input type="radio" name="efrt" value="9" id="efrt9" /><span>9</span>
+  </label>
+  <label for="efrt10">
+    <input type="radio" name="efrt" value="10" id="efrt10" /><span>10</span>
+  </label>
+  <label for="efrt11">
+    <input type="radio" name="efrt" value="11" id="efrt11" /><span>11</span>
+  </label>
+  <label for="efrt12">
+    <input type="radio" name="efrt" value="12" id="efrt12" /><span>12</span>
+  </label>
+  <label for="efrt13">
+    <input type="radio" name="efrt" value="13" id="efrt13" /><span>13</span>
+  </label>
+  <label for="efrt14">
+    <input type="radio" name="efrt" value="14" id="efrt14" /><span>14</span>
+  </label>
+  <label for="efrt15">
+    <input type="radio" name="efrt" value="15" id="efrt15" /><span>15</span>
+  </label>
+  <label for="efrt16">
+    <input type="radio" name="efrt" value="16" id="efrt16" /><span>16</span>
+  </label>
+  <label for="efrt17">
+    <input type="radio" name="efrt" value="17" id="efrt17" /><span>17</span>
+  </label>
+  <label for="efrt18">
+    <input type="radio" name="efrt" value="18" id="efrt18" /><span>18</span>
+  </label>
+  <label for="efrt19">
+    <input type="radio" name="efrt" value="19" id="efrt19" /><span>19</span>
+  </label>
+  <label for="efrt20">
+    <input type="radio" name="efrt" value="20" id="efrt20" /><span>20</span>
+  </label>
+  <label for="efrt20">Very high</label>
 </div>
 
-<h2>Frustration</h2>
-<p>How insecure, discouraged, irritated, stressed and annoyed were you?</p>
+<div class="header">
+  <h2>Frustration</h2>
+  <p>How insecure, discouraged, irritated, stressed and annoyed were you?</p>
+</div>
 <div class="radiogroup">
-  <label for="frustration0">Very low</label>
-  <input type="radio" name="frustration" value="0" id="frustration0" />
-  <input type="radio" name="frustration" value="1" id="frustration1" />
-  <input type="radio" name="frustration" value="2" id="frustration2" />
-  <input type="radio" name="frustration" value="3" id="frustration3" />
-  <input type="radio" name="frustration" value="4" id="frustration4" />
-  <input type="radio" name="frustration" value="5" id="frustration5" />
-  <input type="radio" name="frustration" value="6" id="frustration6" />
-  <input type="radio" name="frustration" value="7" id="frustration7" />
-  <input type="radio" name="frustration" value="8" id="frustration8" />
-  <input type="radio" name="frustration" value="9" id="frustration9" />
-  <input type="radio" name="frustration" value="10" id="frustration10" />
-  <input type="radio" name="frustration" value="11" id="frustration11" />
-  <input type="radio" name="frustration" value="12" id="frustration12" />
-  <input type="radio" name="frustration" value="13" id="frustration13" />
-  <input type="radio" name="frustration" value="14" id="frustration14" />
-  <input type="radio" name="frustration" value="15" id="frustration15" />
-  <input type="radio" name="frustration" value="16" id="frustration16" />
-  <input type="radio" name="frustration" value="17" id="frustration17" />
-  <input type="radio" name="frustration" value="18" id="frustration18" />
-  <input type="radio" name="frustration" value="19" id="frustration19" />
-  <input type="radio" name="frustration" value="20" id="frustration20" />
-  <label for="frustration20">Very high</label>
+  <label for="frus0">Very low</label>
+  <label for="frus0">
+    <input type="radio" name="frus" value="0" id="frus0" /><span>0</span>
+  </label>
+  <label for="frus1">
+    <input type="radio" name="frus" value="1" id="frus1" /><span>1</span>
+  </label>
+  <label for="frus2">
+    <input type="radio" name="frus" value="2" id="frus2" /><span>2</span>
+  </label>
+  <label for="frus3">
+    <input type="radio" name="frus" value="3" id="frus3" /><span>3</span>
+  </label>
+  <label for="frus4">
+    <input type="radio" name="frus" value="4" id="frus4" /><span>4</span>
+  </label>
+  <label for="frus5">
+    <input type="radio" name="frus" value="5" id="frus5" /><span>5</span>
+  </label>
+  <label for="frus6">
+    <input type="radio" name="frus" value="6" id="frus6" /><span>6</span>
+  </label>
+  <label for="frus7">
+    <input type="radio" name="frus" value="7" id="frus7" /><span>7</span>
+  </label>
+  <label for="frus8">
+    <input type="radio" name="frus" value="8" id="frus8" /><span>8</span>
+  </label>
+  <label for="frus9">
+    <input type="radio" name="frus" value="9" id="frus9" /><span>9</span>
+  </label>
+  <label for="frus10">
+    <input type="radio" name="frus" value="10" id="frus10" /><span>10</span>
+  </label>
+  <label for="frus11">
+    <input type="radio" name="frus" value="11" id="frus11" /><span>11</span>
+  </label>
+  <label for="frus12">
+    <input type="radio" name="frus" value="12" id="frus12" /><span>12</span>
+  </label>
+  <label for="frus13">
+    <input type="radio" name="frus" value="13" id="frus13" /><span>13</span>
+  </label>
+  <label for="frus14">
+    <input type="radio" name="frus" value="14" id="frus14" /><span>14</span>
+  </label>
+  <label for="frus15">
+    <input type="radio" name="frus" value="15" id="frus15" /><span>15</span>
+  </label>
+  <label for="frus16">
+    <input type="radio" name="frus" value="16" id="frus16" /><span>16</span>
+  </label>
+  <label for="frus17">
+    <input type="radio" name="frus" value="17" id="frus17" /><span>17</span>
+  </label>
+  <label for="frus18">
+    <input type="radio" name="frus" value="18" id="frus18" /><span>18</span>
+  </label>
+  <label for="frus19">
+    <input type="radio" name="frus" value="19" id="frus19" /><span>19</span>
+  </label>
+  <label for="frus20">
+    <input type="radio" name="frus" value="20" id="frus20" /><span>20</span>
+  </label>
+  <label for="frus20">Very high</label>
 </div>
 
 <div onclick="submit(event)" class="submit btn btn-primary">Submit</div>
@@ -249,7 +494,8 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
+    align-items: flex-start;
+    margin-bottom: 40px;
   }
   .radiogroup input[type="radio"] {
     cursor: pointer;
@@ -261,6 +507,37 @@
   }
   h2 {
     font-size: 1.1em;
+  }
+  .radiogroup label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    line-height: 1;
+    gap: 10px;
+    font-size: 12px;
+    color: #c0c0c0;
+  }
+
+  .radiogroup label:first-child,
+  .radiogroup label:last-child {
+    margin-top: -2px;
+    font-size: 16px;
+    width: 67px;
+    text-align: left;
+    color: #000;
+  }
+
+  .header {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+
+  body {
+    overflow-y: auto;
   }
 </style>
 
