@@ -34,8 +34,9 @@
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
+    }).then(() => {
+      document.getElementById("next-button").click();
     });
-    document.getElementById("next-button").click();
   }
 </script>
 
