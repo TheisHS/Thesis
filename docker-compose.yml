@@ -22,7 +22,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - AI_FIRST=False
+      - PID=1
       - DEBUG=True
     volumes:
       - ./java-src/Experiment1/img:/app/_static/exp1

@@ -2,6 +2,7 @@ from otree.api import *
 import requests, os
 
 _DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+_PID = int(os.getenv('PID', '1'))
 
 class DebugPage(Page):
     @staticmethod
@@ -27,7 +28,7 @@ class FirstPages(Page):
     def js_vars(player):
         return dict(
             id = 1,
-            useAI = os.getenv('AI_FIRST', 'True').lower() == 'true',
+            useAI = (_PID % 4) in [2,3],
             debug = _DEBUG,
         )
     
@@ -35,7 +36,8 @@ class FirstPages(Page):
     def vars_for_template(player):
         return dict(
             id = 1,
-            useAI = os.getenv('AI_FIRST', 'True').lower() == 'true',
+            useAI = (_PID % 4) in [2,3],
+            pid = _PID
         )
 
 class EyeCalibration1(FirstPages):
@@ -79,7 +81,7 @@ class SecondPages(Page):
     def js_vars(player):
         return dict(
             id = 2,
-            useAI = os.getenv('AI_FIRST', 'False').lower() != 'true',
+            useAI = (_PID % 4) in [0, 1],
             debug = _DEBUG,
         )
     
@@ -87,7 +89,8 @@ class SecondPages(Page):
     def vars_for_template(player):
         return dict(
             id = 2,
-            useAI = os.getenv('AI_FIRST', 'False').lower() != 'true',
+            useAI = (_PID % 4) in [0, 1],
+            pid = _PID
         )
 
 class EyeCalibration2(SecondPages):
@@ -133,19 +136,18 @@ class End(DebugPage):
         requests.get('http://host.docker.internal:5000/save-results')
 
 
-page_sequence = [
-    Empty,
-    TestSetup,
-    Instructions,
-    EyeCalibration1,
-    Break1,
-    TaskDescription1,
-    Task1,
-    TLX1,
-    EyeCalibration2,
-    Break2,
-    TaskDescription2,
-    Task2,
-    TLX2,
-    End
-]
+page_sequence = [Empty, TestSetup, Instructions]
+
+first_task = [EyeCalibration1, Break1, TaskDescription1, Task1, TLX1]
+second_task = [EyeCalibration2, Break2, TaskDescription2, Task2, TLX2]
+
+if (_PID % 4) in [1, 2]:
+    # First task first
+    page_sequence += first_task
+    page_sequence += second_task
+else:
+    # Second task first
+    page_sequence += second_task
+    page_sequence += first_task
+
+page_sequence += [End]
