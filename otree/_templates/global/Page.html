@@ -6,6 +6,8 @@
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ event: eventString, isAI }),
+    }).catch(() => {
+      console.log("Error lsl sending event.");
     });
   }
 </script>

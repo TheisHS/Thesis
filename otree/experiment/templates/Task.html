@@ -5,6 +5,8 @@
 <script>
   sendEvent("taskBegin", js_vars.useAI);
 
+  let timer_clicks = 0;
+
   function runTests(event) {
     event.preventDefault();
     document.querySelector("#test-results").innerHTML = "Running tests...";
@@ -34,6 +36,15 @@
     event.preventDefault();
     document.querySelector("dialog").removeAttribute("open");
     sendEvent("hideTask", js_vars.useAI);
+  }
+
+  function clickTimer(e) {
+    e.preventDefault();
+    timer_clicks++;
+    console.log("click");
+    if (timer_clicks >= 3) {
+      document.querySelector("#next-button").click();
+    }
   }
 
   document.addEventListener("keydown", function (event) {
@@ -83,6 +94,13 @@
 </div>
 
 <button id="next-button" class="btn btn-primary">Continue</button>
+<button
+  id="next-button-hidden"
+  class="btn btn-primary"
+  onclick="clickTimer(event)"
+>
+  Continue
+</button>
 
 <dialog>
   <button class="close" onclick="hideTask(event)">✕</button>
@@ -182,6 +200,11 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+  }
+
+  body #next-button-hidden {
+    opacity: 0;
+    cursor: default;
   }
 </style>
 
