@@ -4,6 +4,12 @@
   <div class="initial">
     You can chat with ChatGPT 4o-mini by typing in a message below.
   </div>
+  <div class="initial small">
+    You cannot paste images here, but you can write text prompts. It will
+    understand code if you paste it, but if you want it formatted correctly (for
+    yourself), you can insert three backticks
+    <span class="code">```</span> around it (shift + ´ button).
+  </div>
 </div>
 
 <div>
@@ -11,16 +17,35 @@
 </div>
 
 <div class="input-container">
-  <input
-    type="text"
+  <textarea
+    rows="1"
     id="gpt-input"
     placeholder="Type a message..."
     onfocus="sendEvent('GPTStartPrompting', true);"
-  />
+    oninput="resizeOnWrite(event)"
+  ></textarea>
   <button onclick="sendMessage(event)"></button>
 </div>
 
 <script>
+  let isShiftPressed = false;
+  let input = document.getElementById("gpt-input");
+
+  input.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && !isShiftPressed) {
+      event.preventDefault();
+      sendMessage(event);
+    }
+    if (event.key === "Shift") {
+      isShiftPressed = true;
+    }
+  });
+  input.addEventListener("keyup", function (event) {
+    if (event.key === "Shift") {
+      isShiftPressed = false;
+    }
+  });
+
   async function sendMessage(event) {
     event.preventDefault();
     const inputField = document.getElementById("gpt-input");
@@ -29,11 +54,16 @@
 
     if (userMessage === "") return;
 
+    var converter = new showdown.Converter();
+
     document.getElementById("gpt-loading").style.visibility = "visible";
     sendEvent("GPTSentPrompt", true);
 
-    chatBox.innerHTML += `<div class="message user">${userMessage}</div>`;
+    chatBox.innerHTML += `<div class="message user">${converter.makeHtml(
+      userMessage
+    )}</div>`;
     inputField.value = "";
+    inputField.setAttribute("rows", 1);
     chatBox.scrollTop = chatBox.scrollHeight;
     try {
       const response = await fetch("http://127.0.0.1:5000/chat", {
@@ -44,8 +74,7 @@
 
       const data = await response.json();
       const botMessage = data.reply;
-      var converter = new showdown.Converter(),
-        text = botMessage,
+      let text = botMessage,
         html = converter.makeHtml(text);
 
       chatBox.innerHTML += `<div class="message bot">${html}</div>`;
@@ -58,9 +87,21 @@
       document.getElementById("gpt-loading").style.visibility = "hidden";
     }
   }
+
+  function resizeOnWrite(event) {
+    const text = event.target.value;
+    const lines = text.split("\n").length;
+    const maxLines = 5; // Maximum number of lines before scrolling
+    event.target.setAttribute("rows", lines > maxLines ? maxLines : lines);
+  }
 </script>
 
 <style>
+  .gpt-window {
+    display: flex;
+    flex-direction: column;
+  }
+
   .gpt-window > * {
     padding: 0px 15px;
   }
@@ -69,7 +110,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc(100% - 60px);
+    flex-grow: 1;
     overflow-y: auto;
     padding-bottom: 40px;
   }
@@ -82,6 +123,13 @@
     text-align: center;
     align-self: center;
     padding: 140px;
+  }
+  .gpt-window .chat-container .initial.small {
+    font-size: 16px;
+    text-align: center;
+    align-self: center;
+    padding-top: 0px;
+    margin-top: -50px;
   }
 
   .gpt-window .message {
@@ -139,12 +187,15 @@
     display: flex;
     gap: 10px;
     width: 100%;
+    margin-bottom: 10px;
   }
-  .gpt-window input {
+  .gpt-window input,
+  .gpt-window textarea {
     flex: 1;
     padding: 10px 16px;
-    border-radius: 50px;
+    border-radius: 16px;
     border: 1px solid #ccc;
+    resize: none;
   }
 
   .gpt-window .input-container button {
@@ -152,9 +203,11 @@
       50% no-repeat transparent;
     box-shadow: 0 0 10px -6px;
     width: 46px;
+    height: 46px;
     border: none;
     border-radius: 50%;
     transition: all 0.2s;
+    align-self: flex-end;
   }
   .gpt-window .input-container button:hover {
     box-shadow: 0 0 10px -3px;

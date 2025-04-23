@@ -46,27 +46,6 @@
       document.querySelector("#next-button").click();
     }
   }
-
-  document.addEventListener("keydown", function (event) {
-    if (
-      event.key === "Enter" &&
-      event.target.tagName !== "INPUT" &&
-      event.target.tagName !== "TEXTAREA"
-    ) {
-      event.preventDefault();
-    }
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (
-      event.key === "Enter" &&
-      event.target.tagName === "INPUT" &&
-      event.target.id === "gpt-input"
-    ) {
-      event.preventDefault();
-      sendMessage(event);
-    }
-  });
 </script>
 
 <div class="full split-window">
