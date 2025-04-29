@@ -65,11 +65,11 @@ def on_click(x, y, button, pressed):
   if not pressed: return
   click_outlet.push_sample([f"click {x},{y} {button}"])
 
-def on_keypress(key):
-  key_outlet.push_sample([str(key)])
+def on_keypress(key, pressed):
+  key_outlet.push_sample([f"{key} {'down' if pressed else 'up'}"])
 
 
 if __name__ == "__main__":
   with mouse.Listener(on_move=on_move, on_click=on_click) as mouselistener:
-    with keyboard.Listener(on_press=on_keypress) as keylistener:
+    with keyboard.Listener(on_press=lambda k: on_keypress(k, True), on_release=lambda k: on_keypress(k, False)) as keylistener:
       app.run(port=4000, host='0.0.0.0')
