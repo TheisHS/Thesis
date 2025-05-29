@@ -8,7 +8,12 @@
    pip install -r lsl-server/requirements.txt
    ```
 
-2. Run the `lsl-server` and start
+2. Set the environment variables for the oTree image in `docker-compose.yml`.
+
+   - `PID`: The participant ID number. This defines the order of the tasks and AI-assistance.
+   - `DEBUG`: Toggles the debug mode. This defines whether continue buttons are available in the user interface.
+
+3. Run the `lsl-server` and docker containers
 
    ```sh
    python lsl-server/server.py
